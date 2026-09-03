@@ -13,7 +13,7 @@ export default async function LoginPage(props: PageProps<"/login">) {
   return (
     <main className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center px-6 py-16">
       <Logo size={32} className="mb-10 self-start" />
-      <h1 className="text-xl font-semibold tracking-tight">Sign in</h1>
+      <h1 className="text-2xl font-bold">Sign in</h1>
       <p className="mt-2 mb-8 text-ink-2">
         New here? The same link creates your workspace.
       </p>

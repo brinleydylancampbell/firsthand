@@ -70,7 +70,7 @@ export function Wall({ workspace, items }: { workspace: Workspace; items: Public
           </button>
         </div>
         <div className="mt-12 max-w-2xl">
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight">What customers say</h1>
+          <h1 className="text-3xl font-extrabold sm:text-4xl">What customers say</h1>
           <p className="mt-3 text-ink-2">
             {items.length} {items.length === 1 ? "testimonial" : "testimonials"}, each one published with the customer’s consent, in their own words.
           </p>
@@ -133,10 +133,10 @@ export function WallCard({ t, ws }: { t: PublicTestimonial; ws: string }) {
       <div className="flex items-center gap-3">
         <Avatar src={t.avatar_url} name={t.display_name} size={40} />
         <div className="min-w-0 flex-1">
-          <p className="truncate font-medium">{t.display_name}</p>
-          {t.display_meta ? <p className="truncate text-sm text-ink-2">{t.display_meta}</p> : null}
+          <p className="font-semibold leading-snug">{t.display_name}</p>
+          {t.display_meta ? <p className="text-sm leading-snug text-ink-2">{t.display_meta}</p> : null}
         </div>
-        <Stars rating={t.rating} />
+        <Stars rating={t.rating} className="shrink-0" />
       </div>
       <blockquote className="mt-4 font-serif text-[1.05rem] leading-relaxed">
         <HighlightedBody t={t} />

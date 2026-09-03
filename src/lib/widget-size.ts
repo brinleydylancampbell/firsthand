@@ -5,7 +5,7 @@ import type { WidgetConfig, WidgetType } from "./types";
  * height before the script runs. Cards are fixed height, grids have fixed
  * column counts per breakpoint, so there is nothing left to shift.
  */
-export const CARD_H = 200;
+export const CARD_H = 232;
 export const GAP = 12;
 export const SINGLE_H = 176;
 export const CAROUSEL_H = CARD_H + GAP;

@@ -42,7 +42,7 @@ export default async function FormPage(props: PageProps<"/f/[ws]/[form]">) {
     <BrandFrame workspace={workspace}>
       <main className="mx-auto w-full max-w-2xl px-6 py-10">
         <div className="max-w-2xl">
-          <h1 className="text-xl font-semibold tracking-tight">{form.title}</h1>
+          <h1 className="text-2xl font-bold">{form.title}</h1>
           {form.intro ? <p className="mt-2 text-ink-2">{form.intro}</p> : null}
           {form.incentive ? (
             <p className="mt-3 inline-block rounded-full bg-accent-soft px-3 py-1 text-sm text-accent-strong">{form.incentive}</p>

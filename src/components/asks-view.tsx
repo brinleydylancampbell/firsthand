@@ -53,7 +53,7 @@ export function AsksView({
     <div className="mx-auto w-full max-w-3xl px-6 py-8">
       <Link href="/app/collect" className="text-sm text-ink-2 hover:text-ink">← Collect</Link>
       <header className="mt-4 mb-6">
-        <h1 className="mt-1 text-xl font-semibold tracking-tight">Ask at the right moment</h1>
+        <h1 className="mt-1 text-2xl font-bold">Ask at the right moment</h1>
         <p className="mt-2 text-sm text-ink-2">
           Your order or job system posts one line of JSON when something is delivered. Firsthand waits the delay you set, then emails a link to your form. Same-day asks get answered; asks a month later mostly don’t.
         </p>
@@ -159,7 +159,7 @@ export function AsksView({
           <CopyButton text={workspace.webhook_secret} label="Copy secret" />
           <Button size="sm" variant="ghost" disabled={pending} onClick={() => { if (confirm("Rotate the secret? Anything using the old one stops working.")) run(rotateSecret, "Secret rotated."); }}>Rotate</Button>
         </div>
-        <pre className="overflow-x-auto rounded-2xl border border-line bg-paper-2 p-4 text-xs leading-relaxed"><code>{curl}</code></pre>
+        <pre className="whitespace-pre-wrap break-all rounded-2xl border border-line bg-paper-2 p-4 text-xs leading-relaxed"><code>{curl}</code></pre>
         <p className="text-xs text-ink-3">Links point to your <span className="text-ink">{formSlug}</span> form. The order reference is stored with the testimonial as provenance.</p>
       </section>
 

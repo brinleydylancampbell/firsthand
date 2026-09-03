@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Embed test pages", robots: { index: 
 export default function EmbedTestIndex() {
   return (
     <main className="mx-auto w-full max-w-2xl px-6 py-16">
-      <h1 className="mt-2 text-xl font-semibold tracking-tight">Three host pages, one snippet</h1>
+      <h1 className="mt-2 text-2xl font-bold">Three host pages, one snippet</h1>
       <p className="mt-3 text-ink-2">
         The same widgets pasted into deliberately different sites. Fonts are inherited, colours come from CSS variables, and
         the height is reserved before the script runs so nothing on the host page moves.

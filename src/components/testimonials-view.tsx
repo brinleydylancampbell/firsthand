@@ -48,7 +48,7 @@ export function TestimonialsView({ workspace, items }: { workspace: Workspace; i
     <div className="mx-auto w-full max-w-3xl px-6 py-8">
       <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-xl font-semibold tracking-tight">Testimonials</h1>
+          <h1 className="text-2xl font-bold">Testimonials</h1>
           <p className="mt-1 text-sm text-ink-2">
             {counts.pending ? `${counts.pending} waiting for review` : "Nothing waiting"} · {counts.approved} live on your wall
           </p>
@@ -127,7 +127,7 @@ export function TestimonialsView({ workspace, items }: { workspace: Workspace; i
             aria-selected={tab === k}
             onClick={() => setTab(k)}
             className={cn(
-              "-mb-px border-b-2 px-3 py-2 text-sm",
+              "-mb-px border-b-[3px] px-3 py-2 text-sm font-medium",
               tab === k ? "border-accent font-medium text-ink" : "border-transparent text-ink-2 hover:text-ink",
             )}
           >

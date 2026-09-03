@@ -35,7 +35,7 @@ export function ImportPanel({ onClose }: { onClose: () => void }) {
       <form onSubmit={submit} className="w-full max-w-xl space-y-5 rounded-2xl border border-line bg-card p-6 shadow-lg" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h2 className="mt-1 text-lg font-semibold">Paste a review from anywhere</h2>
+            <h2 className="mt-1 text-lg font-bold">Paste a review from anywhere</h2>
             <p className="mt-1 text-sm text-ink-2">A Google review, a post on X, an email. We split out the name and the text; you approve it from the inbox.</p>
           </div>
           <Button type="button" variant="ghost" size="sm" onClick={onClose}>Close</Button>

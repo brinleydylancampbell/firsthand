@@ -53,7 +53,7 @@ export function SettingsForm({ workspace, email }: { workspace: Workspace; email
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-8">
       <header className="mb-8">
-        <h1 className="mt-1 text-xl font-semibold tracking-tight">Workspace</h1>
+        <h1 className="mt-1 text-2xl font-bold">Workspace</h1>
       </header>
 
       <div className="space-y-10">

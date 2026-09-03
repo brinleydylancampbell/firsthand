@@ -37,7 +37,7 @@ export function FormEditor({ form, workspace }: { form: Form; workspace: Workspa
     <div className="mx-auto w-full max-w-3xl px-6 py-8">
       <Link href="/app/collect" className="text-sm text-ink-2 hover:text-ink">← Collect</Link>
       <header className="mt-4 mb-8 flex flex-wrap items-end justify-between gap-4">
-        <h1 className="text-xl font-semibold tracking-tight">{title || "Untitled form"}</h1>
+        <h1 className="text-2xl font-bold">{title || "Untitled form"}</h1>
         <div className="flex items-center gap-2">
           <CopyButton text={url} label="Copy link" />
           <a href={url} target="_blank" rel="noreferrer" className="text-sm text-ink-2 underline underline-offset-2 hover:text-ink">Preview</a>

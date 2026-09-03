@@ -51,7 +51,7 @@ export default async function ProvenancePage(props: PageProps<"/w/[ws]/t/[id]">)
         <Link href={`/w/${ws}`} className="text-sm text-ink-2 underline underline-offset-2 hover:text-ink">
           ← Back to the wall
         </Link>
-        <h1 className="mt-2 text-xl font-semibold tracking-tight">
+        <h1 className="mt-2 text-2xl font-bold">
           {t.source === "import" ? `Imported from ${sourceName[t.provenance?.source_label ?? "other"] ?? "another source"}` : "Submitted by the customer, with consent"}
         </h1>
 

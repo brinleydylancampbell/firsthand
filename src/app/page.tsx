@@ -27,7 +27,7 @@ export default function Home() {
       <SiteHeader />
       <main id="main" className="flex-1">
         <section className="mx-auto w-full max-w-6xl px-5 pt-14 pb-10 sm:px-8 sm:pt-20">
-          <h1 className="max-w-3xl text-4xl font-extrabold sm:text-5xl">Testimonials in your customers’ own words.</h1>
+          <h1 className="max-w-3xl text-4xl font-extrabold sm:text-5xl lg:text-[5rem] lg:leading-[1.02]">Testimonials in your customers’ own words.</h1>
           <p className="mt-5 max-w-xl site-lede text-ink-2">Collected with consent. Found in seconds. Shown anywhere without slowing your site down.</p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <ButtonLink href="/demo" size="lg" className="h-[52px] px-6">Open the demo</ButtonLink>

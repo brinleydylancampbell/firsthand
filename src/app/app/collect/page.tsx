@@ -27,7 +27,7 @@ export default async function CollectPage() {
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-8">
       <header className="mb-8">
-        <h1 className="text-xl font-semibold tracking-tight">Collect</h1>
+        <h1 className="text-2xl font-bold">Collect</h1>
         <p className="mt-1 text-sm text-ink-2">Share a link, or let your order system ask for you.</p>
       </header>
 

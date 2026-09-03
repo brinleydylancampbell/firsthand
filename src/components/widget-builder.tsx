@@ -165,10 +165,10 @@ export function WidgetBuilder({
             </Field>
             <div className="grid grid-cols-2 gap-3">
               <Field label="Accent" htmlFor="accent" hint="Stars and links">
-                <Input id="accent" value={accent} onChange={(e) => setAccent(e.target.value)} placeholder="#1d4ed8" />
+                <Input id="accent" value={accent} onChange={(e) => setAccent(e.target.value)} placeholder="#7858d8" />
               </Field>
               <Field label="Corner radius" htmlFor="radius">
-                <Input id="radius" value={radius} onChange={(e) => setRadius(e.target.value)} placeholder="2px" />
+                <Input id="radius" value={radius} onChange={(e) => setRadius(e.target.value)} placeholder="12px" />
               </Field>
             </div>
             <div className="space-y-1.5 text-sm">
@@ -225,9 +225,9 @@ export function WidgetBuilder({
               <p className="text-sm font-medium">Snippet</p>
               <CopyButton text={code} label="Copy snippet" />
             </div>
-            <pre className="mt-2 overflow-x-auto rounded-2xl border border-line bg-paper-2 p-4 text-xs leading-relaxed"><code>{code}</code></pre>
+            <pre className="mt-2 whitespace-pre-wrap break-all rounded-2xl border border-line bg-paper-2 p-4 text-xs leading-relaxed"><code>{code}</code></pre>
             <p className="mt-2 text-xs text-ink-3">
-              The style rule reserves the exact height for each breakpoint, so the host page never shifts while the widget loads. Save before pasting so the live widget matches this preview.
+              The style rule reserves the height for a full-width placement at each breakpoint, so the host page never shifts while the widget loads. Cards lay out by the widget’s own width, so a narrow column gets fewer columns. Save before pasting so the live widget matches this preview.
             </p>
           </section>
         </div>

@@ -30,7 +30,7 @@ export default async function ThanksPage(props: PageProps<"/f/[ws]/[form]/thanks
   return (
     <BrandFrame workspace={workspace}>
       <main className="mx-auto w-full max-w-2xl px-6 py-10">
-        <h1 className="mt-1 text-xl font-semibold tracking-tight">
+        <h1 className="mt-1 text-2xl font-bold">
           {(form as Form).thank_you ?? "That means a lot. Here is what you said."}
         </h1>
 

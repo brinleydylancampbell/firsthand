@@ -30,7 +30,7 @@ export function Logo({
         priority={priority}
         className="shrink-0"
       />
-      {wordmark ? <span className="font-semibold tracking-tight">Firsthand</span> : null}
+      {wordmark ? <span className="font-heading font-extrabold tracking-[-0.03em]">Firsthand</span> : null}
     </>
   );
   const cls = cn("inline-flex items-center gap-2 text-ink", className);

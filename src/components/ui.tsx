@@ -11,10 +11,10 @@ const buttonBase =
   "inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-transparent font-medium whitespace-nowrap transition-[background-color,color,transform,box-shadow] duration-150 select-none outline-none focus-visible:outline-3 focus-visible:outline-accent-strong focus-visible:outline-offset-2 active:translate-y-px disabled:pointer-events-none disabled:opacity-50";
 
 const buttonVariants: Record<ButtonVariant, string> = {
-  primary: "bg-accent text-accent-ink hover:bg-accent-hover",
-  secondary: "border-line bg-card text-ink hover:bg-paper-2",
+  primary: "border-2 border-ink bg-accent text-accent-ink shadow-[0_2px_0_0_var(--ink)] hover:bg-accent-hover active:shadow-none",
+  secondary: "border-2 border-ink/15 bg-card text-ink hover:border-ink hover:bg-card",
   ghost: "text-ink-2 hover:bg-paper-2 hover:text-ink",
-  danger: "bg-danger-soft text-danger hover:bg-danger/15",
+  danger: "border-2 border-transparent bg-danger-soft text-danger hover:border-danger/40",
 };
 
 const buttonSizes: Record<ButtonSize, string> = {
