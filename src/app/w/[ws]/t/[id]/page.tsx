@@ -51,7 +51,6 @@ export default async function ProvenancePage(props: PageProps<"/w/[ws]/t/[id]">)
         <Link href={`/w/${ws}`} className="text-sm text-ink-2 underline underline-offset-2 hover:text-ink">
           ← Back to the wall
         </Link>
-        <p className="eyebrow mt-8">How this was collected</p>
         <h1 className="mt-2 text-xl font-semibold tracking-tight">
           {t.source === "interview"
             ? "A short interview, in the customer’s own words"
@@ -60,7 +59,7 @@ export default async function ProvenancePage(props: PageProps<"/w/[ws]/t/[id]">)
               : "Submitted through a form"}
         </h1>
 
-        <figure className="mt-8 rounded-sm border border-line p-5">
+        <figure className="mt-8 rounded-2xl border border-line bg-card p-5">
           <div className="flex items-center gap-3">
             <Avatar src={who.display_name === "Verified customer" ? null : t.avatar_url} name={who.display_name} size={40} />
             <div>
@@ -81,7 +80,7 @@ export default async function ProvenancePage(props: PageProps<"/w/[ws]/t/[id]">)
             <ol className="mt-5 space-y-5">
               {t.raw_transcript.map((turn, i) => (
                 <li key={i} className={turn.role === "customer" ? "pl-6" : ""}>
-                  <p className="eyebrow">{turn.role === "interviewer" ? "Asked" : "Answered"}</p>
+                  <p className="label-sm">{turn.role === "interviewer" ? "Asked" : "Answered"}</p>
                   <p className={turn.role === "customer" ? "mt-1 font-serif text-[1.05rem] leading-relaxed" : "mt-1 text-ink-2"}>{turn.text}</p>
                 </li>
               ))}
@@ -108,7 +107,7 @@ export default async function ProvenancePage(props: PageProps<"/w/[ws]/t/[id]">)
           </section>
         ) : null}
 
-        <section className="mt-10 rounded-sm bg-paper-2 p-4 text-sm text-ink-2">
+        <section className="mt-10 rounded-lg bg-paper-2 p-4 text-sm text-ink-2">
           <h2 className="font-medium text-ink">Consent</h2>
           <p className="mt-1">
             {consentDate ? `On ${consentDate} the customer agreed` : "The customer agreed"} that {workspace.name} may publish this, and chose {idLabel}.

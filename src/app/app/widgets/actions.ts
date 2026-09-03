@@ -19,7 +19,7 @@ export async function createWidget(): Promise<void> {
     .select("id")
     .single();
   if (error || !data) throw new Error(error?.message ?? "Could not create the widget.");
-  revalidatePath("/app/widgets");
+  revalidatePath("/app/show");
   redirect(`/app/widgets/${data.id}`);
 }
 
@@ -37,7 +37,7 @@ export async function saveWidget(id: string, fields: { name: string; type: Widge
     .eq("id", id)
     .eq("workspace_id", workspace.id);
   if (error) return { ok: false, message: error.message };
-  revalidatePath("/app/widgets");
+  revalidatePath("/app/show");
   revalidatePath(`/app/widgets/${id}`);
   return { ok: true };
 }
@@ -46,8 +46,8 @@ export async function deleteWidget(id: string): Promise<void> {
   const { workspace } = await requireWorkspace();
   const supabase = await createClient();
   await supabase.from("widget").delete().eq("id", id).eq("workspace_id", workspace.id);
-  revalidatePath("/app/widgets");
-  redirect("/app/widgets");
+  revalidatePath("/app/show");
+  redirect("/app/show");
 }
 
 /** Live preview for the builder: same markup the embed serves. */

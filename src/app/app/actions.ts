@@ -15,7 +15,7 @@ async function ctx() {
 
 function revalidate(slug: string) {
   revalidatePath("/app");
-  revalidatePath("/app/testimonials");
+  revalidatePath("/app/collect");
   revalidatePath("/w/[ws]", "page");
   revalidatePath(`/w/${slug}`);
 }

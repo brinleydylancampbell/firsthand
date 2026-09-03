@@ -53,7 +53,6 @@ export function SettingsForm({ workspace, email }: { workspace: Workspace; email
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-8">
       <header className="mb-8">
-        <p className="eyebrow">Settings</p>
         <h1 className="mt-1 text-xl font-semibold tracking-tight">Workspace</h1>
       </header>
 
@@ -75,14 +74,14 @@ export function SettingsForm({ workspace, email }: { workspace: Workspace; email
           <div className="grid gap-4 sm:grid-cols-[1fr_1fr]">
             <Field label="Accent colour" htmlFor="accent" hint="Stars, links and the consent checkbox on public pages.">
               <div className="flex gap-2">
-                <input type="color" value={/^#[0-9a-fA-F]{6}$/.test(accent) ? accent : "#7858d8"} onChange={(e) => setAccent(e.target.value)} aria-label="Pick accent colour" className="h-10 w-12 cursor-pointer rounded-sm border border-line bg-paper p-1" />
+                <input type="color" value={/^#[0-9a-fA-F]{6}$/.test(accent) ? accent : "#7858d8"} onChange={(e) => setAccent(e.target.value)} aria-label="Pick accent colour" className="h-10 w-12 cursor-pointer rounded-2xl border border-line bg-card p-1" />
                 <Input id="accent" value={accent} onChange={(e) => setAccent(e.target.value)} className="font-mono" />
               </div>
             </Field>
             <Field label="Type on public pages" htmlFor="font">
               <div className="grid grid-cols-2 gap-2">
                 {(["sans", "serif"] as const).map((f) => (
-                  <label key={f} className={cn("cursor-pointer rounded-sm border p-3 text-center", font === f ? "border-ink bg-paper-2/60" : "border-line hover:border-ink-3", f === "serif" && "font-serif")}>
+                  <label key={f} className={cn("cursor-pointer rounded-2xl border p-3 text-center", font === f ? "border-accent bg-accent-soft" : "border-line hover:border-line-strong", f === "serif" && "font-serif")}>
                     <input type="radio" className="sr-only" name="font" checked={font === f} onChange={() => setFont(f)} />
                     {f === "sans" ? "Sans" : "Serif"}
                   </label>
@@ -91,7 +90,7 @@ export function SettingsForm({ workspace, email }: { workspace: Workspace; email
             </Field>
           </div>
           <div className="flex items-center gap-4">
-            <div className="flex h-14 min-w-14 items-center justify-center rounded-sm border border-line bg-paper-2 px-3">
+            <div className="flex h-14 min-w-14 items-center justify-center rounded-2xl border border-line bg-paper-2 px-3">
               {logo ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={logo} alt="" className="max-h-10 w-auto" />
@@ -120,9 +119,9 @@ export function SettingsForm({ workspace, email }: { workspace: Workspace; email
           </label>
         </section>
 
-        <section className="rounded-sm border border-line p-4 text-sm text-ink-2">
+        <section className="rounded-2xl border border-line bg-card p-4 text-sm text-ink-2">
           <p><span className="font-medium text-ink">Signed in as</span> {email}</p>
-          <p className="mt-1">Workspace slug <code className="rounded-sm bg-paper-2 px-1">{workspace.slug}</code>. It is part of your public links, so it stays fixed.</p>
+          <p className="mt-1">Workspace slug <code className="rounded-lg bg-paper-2 px-1">{workspace.slug}</code>. It is part of your public links, so it stays fixed.</p>
         </section>
 
         {error ? <ErrorNote title={error} /> : null}

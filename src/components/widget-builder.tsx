@@ -86,10 +86,10 @@ export function WidgetBuilder({
 
   return (
     <div className="mx-auto w-full max-w-6xl px-6 py-8">
-      <Link href="/app/widgets" className="text-sm text-ink-2 hover:text-ink">← Widgets</Link>
+      <Link href="/app/show" className="text-sm text-ink-2 hover:text-ink">← Show</Link>
       <header className="mt-4 mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="eyebrow">Widget</p>
+          <p className="label-sm">Widget</p>
           <Input value={name} onChange={(e) => setName(e.target.value)} aria-label="Widget name" className="mt-1 h-auto border-0 px-0 text-xl font-semibold tracking-tight focus:border-0" />
         </div>
         <div className="flex items-center gap-3">
@@ -104,7 +104,7 @@ export function WidgetBuilder({
             <p className="text-sm font-medium">Type</p>
             <div className="mt-2 space-y-1.5">
               {types.map((t) => (
-                <label key={t.type} className={cn("flex cursor-pointer items-start gap-3 rounded-sm border p-3", type === t.type ? "border-ink bg-paper-2/60" : "border-line hover:border-ink-3")}>
+                <label key={t.type} className={cn("flex cursor-pointer items-start gap-3 rounded-2xl border p-3", type === t.type ? "border-accent bg-accent-soft" : "border-line hover:border-line-strong")}>
                   <input type="radio" name="type" className="sr-only" checked={type === t.type} onChange={() => setType(t.type)} />
                   <span>
                     <span className="block text-sm font-medium">{t.label}</span>
@@ -210,7 +210,7 @@ export function WidgetBuilder({
                 {previewDark ? "Light host page" : "Dark host page"}
               </button>
             </div>
-            <div className={cn("mt-2 rounded-sm border border-line p-6 transition-colors", previewDark ? "bg-[#0f0f0f] text-[#f2f2f2]" : "bg-paper")} style={previewStyle}>
+            <div className={cn("mt-2 rounded-2xl border border-line bg-card p-6 transition-colors", previewDark ? "bg-[#0f0f0f] text-[#f2f2f2]" : "bg-paper")} style={previewStyle}>
               {html ? (
                 <div className={cn(loadingPreview && "opacity-60 transition-opacity")} dangerouslySetInnerHTML={{ __html: html }} />
               ) : (
@@ -225,7 +225,7 @@ export function WidgetBuilder({
               <p className="text-sm font-medium">Snippet</p>
               <CopyButton text={code} label="Copy snippet" />
             </div>
-            <pre className="mt-2 overflow-x-auto rounded-sm border border-line bg-paper-2 p-4 text-xs leading-relaxed"><code>{code}</code></pre>
+            <pre className="mt-2 overflow-x-auto rounded-2xl border border-line bg-paper-2 p-4 text-xs leading-relaxed"><code>{code}</code></pre>
             <p className="mt-2 text-xs text-ink-3">
               The style rule reserves the exact height for each breakpoint, so the host page never shifts while the widget loads. Save before pasting so the live widget matches this preview.
             </p>

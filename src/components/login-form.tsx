@@ -9,7 +9,7 @@ export function LoginForm({ demo, next }: { demo?: boolean; next?: string }) {
 
   if (state?.ok) {
     return (
-      <div className="rounded-sm border border-line p-5">
+      <div className="rounded-2xl border border-line bg-card p-5">
         <p className="font-medium">Check your inbox</p>
         <p className="mt-1 text-sm text-ink-2">
           We sent a sign-in link to <span className="text-ink">{state.email}</span>. It works once and expires in an hour.

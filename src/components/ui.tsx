@@ -2,25 +2,25 @@ import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/* Small, boring primitives. 2px radius, sentence case, no pills. */
+/* Primitives. Rounded grammar, one accent, purple only where you act. */
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 type ButtonSize = "sm" | "md" | "lg";
 
 const buttonBase =
-  "inline-flex items-center justify-center gap-2 rounded-sm font-medium whitespace-nowrap transition-colors disabled:opacity-50 disabled:cursor-not-allowed select-none";
+  "inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-transparent font-medium whitespace-nowrap transition-[background-color,color,transform,box-shadow] duration-150 select-none outline-none focus-visible:outline-3 focus-visible:outline-accent-strong focus-visible:outline-offset-2 active:translate-y-px disabled:pointer-events-none disabled:opacity-50";
 
 const buttonVariants: Record<ButtonVariant, string> = {
-  primary: "bg-ink text-paper hover:bg-ink/90",
-  secondary: "border border-line bg-paper text-ink hover:bg-paper-2",
+  primary: "bg-accent text-accent-ink hover:bg-accent-hover",
+  secondary: "border-line bg-card text-ink hover:bg-paper-2",
   ghost: "text-ink-2 hover:bg-paper-2 hover:text-ink",
-  danger: "border border-line text-danger hover:bg-danger/5",
+  danger: "bg-danger-soft text-danger hover:bg-danger/15",
 };
 
 const buttonSizes: Record<ButtonSize, string> = {
-  sm: "h-8 px-2.5 text-sm",
-  md: "h-9 px-3.5 text-sm",
-  lg: "h-11 px-5 text-base",
+  sm: "h-8 px-3 text-sm rounded-lg",
+  md: "h-10 px-4 text-sm",
+  lg: "h-12 px-5 text-base",
 };
 
 export function buttonClass(variant: ButtonVariant = "primary", size: ButtonSize = "md", extra?: string) {
@@ -46,19 +46,26 @@ export function ButtonLink({
 }
 
 export const inputClass =
-  "w-full rounded-sm border border-line bg-paper px-3 py-2 text-base text-ink placeholder:text-ink-3 focus:border-ink focus:outline-none disabled:opacity-50";
+  "w-full h-11 rounded-xl border border-line-strong/60 bg-card px-3.5 text-base text-ink placeholder:text-ink-3 transition-colors hover:border-line-strong focus:border-accent focus:outline-none focus:ring-3 focus:ring-accent/20 disabled:opacity-50 read-only:bg-paper-2 read-only:text-ink-2";
 
 export function Input({ className, ...props }: ComponentProps<"input">) {
   return <input className={cn(inputClass, className)} {...props} />;
 }
 
 export function Textarea({ className, ...props }: ComponentProps<"textarea">) {
-  return <textarea className={cn(inputClass, "min-h-28 resize-y leading-relaxed", className)} {...props} />;
+  return <textarea className={cn(inputClass, "h-auto min-h-28 resize-y py-2.5 leading-relaxed", className)} {...props} />;
 }
 
 export function Select({ className, children, ...props }: ComponentProps<"select">) {
   return (
-    <select className={cn(inputClass, "appearance-none pr-8 bg-no-repeat bg-[right_0.6rem_center] bg-[length:14px] bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 20 20%22 fill=%22%238c8c8c%22><path d=%22M5.5 7.5l4.5 4.5 4.5-4.5%22 stroke=%22%238c8c8c%22 stroke-width=%221.5%22 fill=%22none%22/></svg>')]", className)} {...props}>
+    <select
+      className={cn(
+        inputClass,
+        "appearance-none pr-9 bg-no-repeat bg-[right_0.75rem_center] bg-[length:14px] bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 20 20%22><path d=%22M5.5 7.5l4.5 4.5 4.5-4.5%22 stroke=%22%237c786e%22 stroke-width=%221.6%22 fill=%22none%22 stroke-linecap=%22round%22/></svg>')]",
+        className,
+      )}
+      {...props}
+    >
       {children}
     </select>
   );
@@ -101,33 +108,25 @@ export function Badge({
 }) {
   const tones = {
     neutral: "bg-paper-2 text-ink-2",
-    accent: "bg-accent/10 text-accent",
-    ok: "bg-ok/10 text-ok",
-    danger: "bg-danger/10 text-danger",
-    outline: "border border-line text-ink-2",
+    accent: "bg-accent-soft text-accent-strong",
+    ok: "bg-ok-soft text-ok",
+    danger: "bg-danger-soft text-danger",
+    outline: "border border-line text-ink-2 bg-card",
   };
   return (
-    <span className={cn("inline-flex h-6 items-center rounded-sm px-2 text-xs font-medium", tones[tone], className)}>
+    <span className={cn("inline-flex h-6 items-center rounded-full px-2.5 text-xs font-medium", tones[tone], className)}>
       {children}
     </span>
   );
 }
 
 export function Card({ className, ...props }: ComponentProps<"div">) {
-  return <div className={cn("rounded-sm border border-line bg-paper", className)} {...props} />;
+  return <div className={cn("rounded-2xl border border-line bg-card shadow-card", className)} {...props} />;
 }
 
-export function EmptyState({
-  title,
-  body,
-  action,
-}: {
-  title: string;
-  body: string;
-  action?: ReactNode;
-}) {
+export function EmptyState({ title, body, action }: { title: string; body: string; action?: ReactNode }) {
   return (
-    <div className="flex flex-col items-start gap-3 rounded-sm border border-dashed border-line p-8">
+    <div className="flex flex-col items-start gap-4 rounded-2xl border border-dashed border-line-strong/40 bg-card/60 p-8">
       <div>
         <p className="font-medium text-ink">{title}</p>
         <p className="mt-1 text-sm text-ink-2">{body}</p>
@@ -139,7 +138,7 @@ export function EmptyState({
 
 export function ErrorNote({ title, body, action }: { title: string; body?: string; action?: ReactNode }) {
   return (
-    <div role="alert" className="rounded-sm border border-danger/30 bg-danger/5 p-4 text-sm">
+    <div role="alert" className="rounded-xl bg-danger-soft p-4 text-sm">
       <p className="font-medium text-danger">{title}</p>
       {body ? <p className="mt-1 text-ink-2">{body}</p> : null}
       {action ? <div className="mt-3">{action}</div> : null}
@@ -156,11 +155,8 @@ export function Stars({ rating, size = 14, className }: { rating: number | null;
   return (
     <span role="img" className={cn("inline-flex items-center gap-0.5", className)} aria-label={`${rating} out of 5 stars`}>
       {[1, 2, 3, 4, 5].map((i) => (
-        <svg key={i} width={size} height={size} viewBox="0 0 20 20" aria-hidden className={i <= rating ? "text-ink" : "text-line"}>
-          <path
-            fill="currentColor"
-            d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"
-          />
+        <svg key={i} width={size} height={size} viewBox="0 0 20 20" aria-hidden className={i <= rating ? "text-accent" : "text-line"}>
+          <path fill="currentColor" d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z" />
         </svg>
       ))}
     </span>
@@ -198,7 +194,7 @@ export function Avatar({
   ) : (
     <span
       aria-hidden
-      className={cn("inline-flex shrink-0 items-center justify-center rounded-full bg-paper-2 text-ink-2 font-medium", className)}
+      className={cn("inline-flex shrink-0 items-center justify-center rounded-full bg-accent-soft font-heading font-semibold text-accent-strong", className)}
       style={{ width: size, height: size, fontSize: Math.max(10, size * 0.38) }}
     >
       {letters || "•"}
@@ -208,7 +204,7 @@ export function Avatar({
 
 export function Kbd({ children }: { children: ReactNode }) {
   return (
-    <kbd className="inline-flex h-5 min-w-5 items-center justify-center rounded-sm border border-line bg-paper-2 px-1 font-sans text-xs text-ink-2">
+    <kbd className="inline-flex h-5 min-w-5 items-center justify-center rounded-xs border border-line bg-card px-1 font-mono text-[11px] text-ink-2">
       {children}
     </kbd>
   );

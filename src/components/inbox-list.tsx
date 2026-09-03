@@ -149,7 +149,7 @@ export function InboxList({ initial, removeOnStatusChange = false }: Props) {
     <div className="space-y-4">
       {error ? <ErrorNote title={error} action={<Button size="sm" variant="secondary" onClick={() => setError(null)}>Dismiss</Button>} /> : null}
       {help ? (
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-sm border border-line bg-paper-2 p-3 text-sm text-ink-2">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-line bg-paper-2 p-3 text-sm text-ink-2">
           <span><Kbd>J</Kbd> <Kbd>K</Kbd> move</span>
           <span><Kbd>A</Kbd> approve</span>
           <span><Kbd>H</Kbd> hide</span>
@@ -158,7 +158,7 @@ export function InboxList({ initial, removeOnStatusChange = false }: Props) {
           <span><Kbd>Esc</Kbd> close</span>
         </div>
       ) : null}
-      <ul ref={listRef} className="divide-y divide-line border-y border-line">
+      <ul ref={listRef} className="divide-y divide-line rounded-2xl border border-line bg-card">
         {items.map((t) => (
           <Row
             key={t.id}
@@ -289,7 +289,7 @@ function Row({
             <ol className="mt-4 space-y-3 border-l border-line pl-4 text-sm">
               {t.raw_transcript.map((turn, i) => (
                 <li key={i}>
-                  <p className="eyebrow">{turn.role === "interviewer" ? "Asked" : "Answered"}</p>
+                  <p className="label-sm">{turn.role === "interviewer" ? "Asked" : "Answered"}</p>
                   <p className={cn("mt-0.5", turn.role === "customer" ? "text-ink" : "text-ink-2")}>{turn.text}</p>
                 </li>
               ))}
@@ -335,7 +335,7 @@ function EditPanel({
   }
 
   return (
-    <form onSubmit={submit} onClick={(e) => e.stopPropagation()} className="mt-3 space-y-3 rounded-sm border border-line bg-paper p-4">
+    <form onSubmit={submit} onClick={(e) => e.stopPropagation()} className="mt-3 space-y-3 rounded-2xl border border-line bg-card p-4">
       <Field label="Testimonial" htmlFor={`body-${t.id}`}>
         <Textarea id={`body-${t.id}`} name="body" defaultValue={t.body} className="font-serif" />
       </Field>

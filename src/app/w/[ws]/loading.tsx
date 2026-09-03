@@ -9,7 +9,7 @@ export default function WallLoading() {
       <Skeleton className="mt-4 h-4 w-96" />
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="rounded-sm border border-line p-5">
+          <div key={i} className="rounded-2xl border border-line bg-card p-5">
             <div className="flex items-center gap-3">
               <Skeleton className="h-10 w-10 rounded-full" />
               <div className="flex-1 space-y-2">

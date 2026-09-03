@@ -40,8 +40,8 @@ export function IdentityChoice({
           <label
             key={o.mode}
             className={cn(
-              "cursor-pointer rounded-sm border p-3 transition-colors",
-              value === o.mode ? "border-ink bg-paper-2/60" : "border-line hover:border-ink-3",
+              "cursor-pointer rounded-2xl border p-3 transition-colors",
+              value === o.mode ? "border-accent bg-accent-soft" : "border-line hover:border-line-strong",
             )}
           >
             <input

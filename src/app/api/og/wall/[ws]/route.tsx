@@ -23,7 +23,7 @@ export async function GET(_request: Request, ctx: RouteContext<"/api/og/wall/[ws
             <span style={{ fontSize: 22, letterSpacing: "0.1em", textTransform: "uppercase", color: "#8c8c8c" }}>Wall of love</span>
             <span style={{ fontSize: 60, fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1.05 }}>What customers say</span>
             {lead ? (
-              <span style={{ fontFamily: "Source Serif 4", fontStyle: "italic", fontSize: 30, lineHeight: 1.35, color: "#5a5a5a" }}>
+              <span style={{ fontFamily: "Inter Tight", fontSize: 30, lineHeight: 1.35, color: "#5a5a5a" }}>
                 “{(lead.highlight ?? lead.body).slice(0, 140)}{(lead.highlight ?? lead.body).length > 140 ? "…" : ""}”
               </span>
             ) : null}

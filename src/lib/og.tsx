@@ -23,17 +23,17 @@ export function loadFonts() {
       const buf = await readFile(join(dir, file));
       return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength) as ArrayBuffer;
     };
-    const [sansR, sansB, serifR, serifI] = await Promise.all([
-      read("InstrumentSans-Regular.woff"),
-      read("InstrumentSans-SemiBold.woff"),
-      read("SourceSerif4-Regular.woff"),
-      read("SourceSerif4-Italic.woff"),
+    const [sansR, sansB, tightR, tightB] = await Promise.all([
+      read("Inter-Regular.woff"),
+      read("Inter-SemiBold.woff"),
+      read("InterTight-Regular.woff"),
+      read("InterTight-SemiBold.woff"),
     ]);
     return [
-      { name: "Instrument Sans", data: sansR, weight: 400 as const, style: "normal" as const },
-      { name: "Instrument Sans", data: sansB, weight: 600 as const, style: "normal" as const },
-      { name: "Source Serif 4", data: serifR, weight: 400 as const, style: "normal" as const },
-      { name: "Source Serif 4", data: serifI, weight: 400 as const, style: "italic" as const },
+      { name: "Inter", data: sansR, weight: 400 as const, style: "normal" as const },
+      { name: "Inter", data: sansB, weight: 600 as const, style: "normal" as const },
+      { name: "Inter Tight", data: tightR, weight: 400 as const, style: "normal" as const },
+      { name: "Inter Tight", data: tightB, weight: 600 as const, style: "normal" as const },
     ];
   })();
   return fontsPromise;
@@ -62,7 +62,7 @@ export function Frame({ width, height, children, accent }: { width: number; heig
         flexDirection: "column",
         background: "#ffffff",
         color: "#141414",
-        fontFamily: "Instrument Sans",
+        fontFamily: "Inter",
         position: "relative",
       }}
     >
@@ -115,7 +115,7 @@ export function QuoteCard({
       <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", flex: 1, padding: pad }}>
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           <Stars rating={rating} size={size === "landscape" ? 26 : 30} color={accent} />
-          <div style={{ fontFamily: "Source Serif 4", fontSize: quoteSize, lineHeight: 1.3, letterSpacing: "-0.01em", display: "flex" }}>
+          <div style={{ fontFamily: "Inter Tight", fontSize: quoteSize, lineHeight: 1.3, letterSpacing: "-0.01em", display: "flex" }}>
             <span>“{clipped}”</span>
           </div>
         </div>

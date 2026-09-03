@@ -161,7 +161,7 @@ export function Interview({ workspace, form, askToken }: { workspace: Workspace;
   return (
     <div className="grid gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-12">
       <section aria-label="Conversation" className="min-w-0">
-        <p className="eyebrow">
+        <p className="label-sm">
           Question {Math.min(answered + 1, total)} of {total}
         </p>
 
@@ -218,9 +218,9 @@ export function Interview({ workspace, form, askToken }: { workspace: Workspace;
 function DraftPanel({ draft, drafting, answered }: { draft: string; drafting: boolean; answered: number }) {
   return (
     <aside aria-label="Your testimonial so far" className="lg:sticky lg:top-8 lg:self-start">
-      <div className="rounded-sm border border-line bg-paper-2/50 p-5">
+      <div className="rounded-2xl border border-line bg-paper-2/70 p-5">
         <div className="flex items-center justify-between">
-          <p className="eyebrow">Your testimonial</p>
+          <p className="label-sm">Your testimonial</p>
           {drafting ? <span className="text-xs text-ink-3">Updating…</span> : draft ? <span className="text-xs text-ink-3">{wordCount(draft)} words</span> : null}
         </div>
         {draft ? (
@@ -280,7 +280,6 @@ function ReviewStage({
       <input type="hidden" name="transcript" value={JSON.stringify(transcript)} />
 
       <section>
-        <p className="eyebrow">Your testimonial</p>
         <h2 className="mt-1 text-lg font-semibold">Does this sound like you?</h2>
         <p className="mt-1 text-sm text-ink-2">Written from your answers, in your words. Change anything you like.</p>
         <Textarea
@@ -330,7 +329,7 @@ function ReviewStage({
 
       <section className="space-y-5">
         <IdentityChoice value={identity} onChange={setIdentity} name={name} role={role} company={company} />
-        <div className="rounded-sm border border-line p-4">
+        <div className="rounded-2xl border border-line bg-card p-4">
           <label className="flex items-start gap-3">
             <input type="checkbox" name="consent" className="mt-1 h-4 w-4 accent-[var(--accent)]" required />
             <span className="text-sm leading-relaxed">{consentText(workspace.name)}</span>

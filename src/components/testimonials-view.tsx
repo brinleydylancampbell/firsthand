@@ -8,15 +8,16 @@ import { reorderTestimonials } from "@/app/app/actions";
 import { searchTestimonials, type SearchHit } from "@/app/app/search-actions";
 import { OBJECTION_LABELS, publicIdentity, type Testimonial, type TestimonialStatus, type Workspace } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { Avatar, Badge, Button, ButtonLink, EmptyState, ErrorNote, Input, Stars } from "@/components/ui";
+import { Avatar, Badge, Button, ButtonLink, EmptyState, ErrorNote, Input, Kbd, Stars } from "@/components/ui";
 import { InboxList } from "@/components/inbox-list";
 import { SharePanel } from "@/components/share-panel";
 import { ImportPanel } from "@/components/import-panel";
 
-type Tab = "approved" | "pending" | "hidden";
+type Tab = "pending" | "approved" | "hidden";
+const tabLabel: Record<Tab, string> = { pending: "Waiting", approved: "Approved", hidden: "Hidden" };
 
 export function TestimonialsView({ workspace, items }: { workspace: Workspace; items: Testimonial[] }) {
-  const [tab, setTab] = useState<Tab>("approved");
+  const [tab, setTab] = useState<Tab>("pending");
   const [query, setQuery] = useState("");
   const [hits, setHits] = useState<SearchHit[] | null>(null);
   const [searchError, setSearchError] = useState<string | null>(null);
@@ -47,7 +48,6 @@ export function TestimonialsView({ workspace, items }: { workspace: Workspace; i
     <div className="mx-auto w-full max-w-3xl px-6 py-8">
       <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="eyebrow">Testimonials</p>
           <h1 className="mt-1 text-xl font-semibold tracking-tight">{items.length} collected</h1>
         </div>
         <Button variant="secondary" onClick={() => setImporting(true)}>
@@ -79,7 +79,7 @@ export function TestimonialsView({ workspace, items }: { workspace: Workspace; i
       {searchError ? <div className="mt-3"><ErrorNote title={searchError} /></div> : null}
 
       {hits !== null ? (
-        <section className="mt-4 rounded-sm border border-line bg-paper-2/50 p-4" aria-live="polite">
+        <section className="mt-4 rounded-2xl border border-line bg-paper-2/70 p-4" aria-live="polite">
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium">{hits.length ? `Best ${hits.length === 1 ? "match" : `${hits.length} matches`}` : "Nothing fits that well"}</p>
             <button type="button" className="text-xs text-ink-3 underline underline-offset-2" onClick={() => setHits(null)}>
@@ -93,13 +93,13 @@ export function TestimonialsView({ workspace, items }: { workspace: Workspace; i
                 if (!t) return null;
                 const who = publicIdentity(t);
                 return (
-                  <li key={h.id} className="flex gap-3 rounded-sm border border-line bg-paper p-3">
+                  <li key={h.id} className="flex gap-3 rounded-2xl border border-line bg-card p-3">
                     <span className="mt-0.5 text-sm text-ink-3">{i + 1}</span>
                     <div className="min-w-0 flex-1">
                       <p className="font-serif leading-relaxed">{t.body}</p>
                       <p className="mt-2 text-sm text-ink-2">
                         <span className="font-medium text-ink">{who.display_name}</span>
-                        {who.display_meta ? `, ${who.display_meta}` : ""} · <span className="text-accent">{h.reason}</span>
+                        {who.display_meta ? `, ${who.display_meta}` : ""} · <span className="text-accent-strong">{h.reason}</span>
                       </p>
                       <div className="mt-2 flex gap-2">
                         <Button size="sm" variant="secondary" onClick={() => navigator.clipboard.writeText(t.body)}>Copy</Button>
@@ -117,21 +117,28 @@ export function TestimonialsView({ workspace, items }: { workspace: Workspace; i
       ) : null}
 
       <div className="mt-8 flex gap-1 border-b border-line" role="tablist">
-        {(["approved", "pending", "hidden"] as Tab[]).map((k) => (
+        {(["pending", "approved", "hidden"] as Tab[]).map((k) => (
           <button
             key={k}
             role="tab"
             aria-selected={tab === k}
             onClick={() => setTab(k)}
             className={cn(
-              "-mb-px border-b-2 px-3 py-2 text-sm capitalize",
-              tab === k ? "border-ink font-medium text-ink" : "border-transparent text-ink-2 hover:text-ink",
+              "-mb-px border-b-2 px-3 py-2 text-sm",
+              tab === k ? "border-accent font-medium text-ink" : "border-transparent text-ink-2 hover:text-ink",
             )}
           >
-            {k} <span className="ml-1 text-ink-3">{counts[k]}</span>
+            {tabLabel[k]} <span className="ml-1 text-ink-3">{counts[k]}</span>
           </button>
         ))}
       </div>
+
+      {tab === "pending" && visible.length > 0 ? (
+        <p className="mt-4 hidden items-center gap-1.5 text-sm text-ink-3 sm:flex">
+          <Kbd>J</Kbd>
+          <Kbd>K</Kbd> move <Kbd>A</Kbd> approve <Kbd>H</Kbd> hide <Kbd>F</Kbd> feature <Kbd>E</Kbd> edit
+        </p>
+      ) : null}
 
       <div className="mt-6">
         {visible.length === 0 ? (
@@ -139,17 +146,17 @@ export function TestimonialsView({ workspace, items }: { workspace: Workspace; i
             <EmptyState
               title="Nothing approved yet"
               body="Approve testimonials from the inbox and they appear on your wall and in widgets."
-              action={<ButtonLink href="/app" variant="secondary">Go to the inbox</ButtonLink>}
+              action={<Button variant="secondary" onClick={() => setTab("pending")}>See what is waiting</Button>}
             />
           ) : tab === "pending" ? (
-            <EmptyState title="Nothing pending" body="New submissions wait here until you approve them." action={<ButtonLink href="/app/forms" variant="secondary">Share a form</ButtonLink>} />
+            <EmptyState title="Nothing waiting" body="New submissions land here. Nothing goes public until you approve it." action={<ButtonLink href="/app/collect" variant="secondary">Share a form link</ButtonLink>} />
           ) : (
             <EmptyState title="Nothing hidden" body="Hidden testimonials stay in your records but never show publicly." />
           )
         ) : tab === "approved" ? (
           <ApprovedList items={visible} onShare={setShare} />
         ) : (
-          <InboxList initial={visible} />
+          <InboxList initial={visible} removeOnStatusChange={tab === "pending"} />
         )}
       </div>
 
@@ -195,7 +202,7 @@ function ApprovedList({ items, onShare }: { items: Testimonial[]; onShare: (t: T
       <p className="text-xs text-ink-3">Drag to set the order on your wall and in widgets. Featured ones always come first.</p>
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
         <SortableContext items={order} strategy={verticalListSortingStrategy}>
-          <ul className="divide-y divide-line border-y border-line">
+          <ul className="divide-y divide-line rounded-2xl border border-line bg-card">
             {order.map((id) => {
               const t = byId.get(id);
               return t ? <SortableRow key={id} t={t} onShare={() => onShare(t)} /> : null;
@@ -219,7 +226,7 @@ function SortableRow({ t, onShare }: { t: Testimonial; onShare: () => void }) {
       <button
         type="button"
         aria-label="Drag to reorder"
-        className="mt-1 cursor-grab touch-none rounded-sm px-1 text-ink-3 hover:bg-paper-2 hover:text-ink active:cursor-grabbing"
+        className="mt-1 cursor-grab touch-none rounded-lg px-1 text-ink-3 hover:bg-paper-2 hover:text-ink active:cursor-grabbing"
         {...attributes}
         {...listeners}
       >

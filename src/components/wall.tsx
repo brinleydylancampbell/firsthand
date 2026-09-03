@@ -63,14 +63,13 @@ export function Wall({ workspace, items }: { workspace: Workspace; items: Public
           <button
             type="button"
             onClick={toggleDark}
-            className="rounded-sm border border-line px-2.5 py-1 text-sm text-ink-2 hover:text-ink"
+            className="rounded-2xl border border-line px-2.5 py-1 text-sm text-ink-2 hover:text-ink"
             aria-pressed={dark}
           >
             {dark ? "Light" : "Dark"}
           </button>
         </div>
         <div className="mt-12 max-w-2xl">
-          <p className="eyebrow">Wall of love</p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight">What customers say</h1>
           <p className="mt-3 text-ink-2">
             {items.length} {items.length === 1 ? "testimonial" : "testimonials"}, each one published with the customer’s consent, in their own words.
@@ -118,8 +117,8 @@ function ChipButton({ active, onClick, children }: { active: boolean; onClick: (
       aria-pressed={active}
       onClick={onClick}
       className={cn(
-        "h-8 rounded-sm border px-3 text-sm transition-colors",
-        active ? "border-ink bg-ink text-paper" : "border-line text-ink-2 hover:border-ink-3 hover:text-ink",
+        "h-8 rounded-full border px-3.5 text-sm transition-colors",
+        active ? "border-ink bg-ink text-card" : "border-line text-ink-2 hover:border-line-strong hover:text-ink",
       )}
     >
       {children}
@@ -130,7 +129,7 @@ function ChipButton({ active, onClick, children }: { active: boolean; onClick: (
 export function WallCard({ t, ws }: { t: PublicTestimonial; ws: string }) {
   const src = t.source === "import" ? sourceLabel[t.source_label ?? ""] ?? "Imported review" : t.source === "interview" ? "Interview" : null;
   return (
-    <figure className="mb-4 break-inside-avoid rounded-sm border border-line bg-paper p-5">
+    <figure className="mb-4 break-inside-avoid rounded-2xl border border-line bg-card p-5">
       <div className="flex items-center gap-3">
         <Avatar src={t.avatar_url} name={t.display_name} size={40} />
         <div className="min-w-0 flex-1">

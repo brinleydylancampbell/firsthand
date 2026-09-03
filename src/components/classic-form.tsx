@@ -81,7 +81,7 @@ export function ClassicForm({ workspace, form, askToken }: { workspace: Workspac
       <section className={cn("space-y-6", step !== 2 && "hidden")}>
         <IdentityChoice value={identity} onChange={setIdentity} name={name} role={role} company={company} />
 
-        <div className="rounded-sm border border-line p-4">
+        <div className="rounded-2xl border border-line bg-card p-4">
           <label className="flex items-start gap-3">
             <input type="checkbox" name="consent" className="mt-1 h-4 w-4 accent-[var(--accent)]" required />
             <span className="text-sm leading-relaxed">{consentText(workspace.name)}</span>

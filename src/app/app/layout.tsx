@@ -23,12 +23,12 @@ export default async function AppLayout({ children }: LayoutProps<"/app">) {
             href={`/w/${workspace.slug}`}
             target="_blank"
             rel="noreferrer"
-            className="rounded-sm px-2 py-1.5 text-ink-2 hover:bg-paper-2 hover:text-ink"
+            className="rounded-lg px-2.5 py-1.5 text-ink-2 hover:bg-paper-2 hover:text-ink"
           >
-            Open wall of love ↗
+            Open your wall ↗
           </a>
           <form action={signOut}>
-            <button className="w-full rounded-sm px-2 py-1.5 text-left text-ink-2 hover:bg-paper-2 hover:text-ink" title={user.email ?? ""}>
+            <button className="w-full rounded-lg px-2.5 py-1.5 text-left text-ink-2 hover:bg-paper-2 hover:text-ink" title={user.email ?? ""}>
               Sign out
             </button>
           </form>

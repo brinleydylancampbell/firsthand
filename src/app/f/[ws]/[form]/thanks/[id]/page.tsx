@@ -30,12 +30,11 @@ export default async function ThanksPage(props: PageProps<"/f/[ws]/[form]/thanks
   return (
     <BrandFrame workspace={workspace}>
       <main className="mx-auto w-full max-w-2xl px-6 py-10">
-        <p className="eyebrow">Thank you</p>
         <h1 className="mt-1 text-xl font-semibold tracking-tight">
           {(form as Form).thank_you ?? "That means a lot. Here is what you said."}
         </h1>
 
-        <figure className="mt-8 rounded-sm border border-line p-6">
+        <figure className="mt-8 rounded-2xl border border-line bg-card p-6">
           <Stars rating={testimonial.rating} />
           <blockquote className="mt-3 font-serif text-lg leading-relaxed">{testimonial.body}</blockquote>
           <figcaption className="mt-5 flex items-center gap-3">
@@ -53,7 +52,7 @@ export default async function ThanksPage(props: PageProps<"/f/[ws]/[form]/thanks
         </p>
 
         {(form as Form).incentive ? (
-          <p className="mt-6 rounded-sm bg-accent/10 px-3 py-2 text-sm text-accent">{(form as Form).incentive}</p>
+          <p className="mt-6 rounded-lg bg-accent-soft px-3 py-2 text-sm text-accent-strong">{(form as Form).incentive}</p>
         ) : null}
 
         <div className="mt-8">

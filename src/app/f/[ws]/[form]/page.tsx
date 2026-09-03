@@ -47,7 +47,7 @@ export default async function FormPage(props: PageProps<"/f/[ws]/[form]">) {
           <h1 className="text-xl font-semibold tracking-tight">{form.title}</h1>
           {form.intro ? <p className="mt-2 text-ink-2">{form.intro}</p> : null}
           {form.incentive ? (
-            <p className="mt-3 inline-block rounded-sm bg-accent/10 px-2 py-1 text-sm text-accent">{form.incentive}</p>
+            <p className="mt-3 inline-block rounded-full bg-accent-soft px-3 py-1 text-sm text-accent-strong">{form.incentive}</p>
           ) : null}
         </div>
         <div className="mt-10">

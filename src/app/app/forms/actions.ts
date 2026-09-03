@@ -36,7 +36,7 @@ export async function createForm(): Promise<void> {
     .select("id")
     .single();
   if (error || !data) throw new Error(error?.message ?? "Could not create the form.");
-  revalidatePath("/app/forms");
+  revalidatePath("/app/collect");
   redirect(`/app/forms/${data.id}`);
 }
 
@@ -66,7 +66,7 @@ export async function saveForm(id: string, fields: FormFields): Promise<ActionRe
     if (error.code === "23505") return { ok: false, message: "Another form already uses that link. Pick a different slug." };
     return { ok: false, message: error.message };
   }
-  revalidatePath("/app/forms");
+  revalidatePath("/app/collect");
   revalidatePath(`/app/forms/${id}`);
   revalidatePath(`/f/${workspace.slug}/${slug}`);
   return { ok: true };
@@ -76,6 +76,6 @@ export async function deleteForm(id: string): Promise<void> {
   const { workspace } = await requireWorkspace();
   const supabase = await createClient();
   await supabase.from("form").delete().eq("id", id).eq("workspace_id", workspace.id);
-  revalidatePath("/app/forms");
-  redirect("/app/forms");
+  revalidatePath("/app/collect");
+  redirect("/app/collect");
 }

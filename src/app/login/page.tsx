@@ -18,7 +18,7 @@ export default async function LoginPage(props: PageProps<"/login">) {
         New here? The same link creates your workspace.
       </p>
       {error ? (
-        <p role="alert" className="mb-4 rounded-sm border border-danger/30 bg-danger/5 p-3 text-sm text-danger">
+        <p role="alert" className="mb-4 rounded-xl border border-danger/30 bg-danger/5 p-3 text-sm text-danger">
           That link has expired or was already used. Request a new one.
         </p>
       ) : null}

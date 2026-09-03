@@ -16,7 +16,7 @@ export default function EmbedDocs() {
       <section className="prose-fh mt-10 space-y-4">
         <h2 className="text-lg font-semibold">The snippet</h2>
         <p className="text-ink-2">Copy it from the widget builder. It looks like this:</p>
-        <pre className="overflow-x-auto rounded-sm border border-line bg-paper-2 p-4 text-xs leading-relaxed"><code>{`<style>[data-firsthand="WIDGET_ID"]{min-height:412px}@media(max-width:899px){[data-firsthand="WIDGET_ID"]{min-height:624px}}@media(max-width:639px){[data-firsthand="WIDGET_ID"]{min-height:1260px}}</style>
+        <pre className="overflow-x-auto rounded-2xl border border-line bg-paper-2 p-4 text-xs leading-relaxed"><code>{`<style>[data-firsthand="WIDGET_ID"]{min-height:412px}@media(max-width:899px){[data-firsthand="WIDGET_ID"]{min-height:624px}}@media(max-width:639px){[data-firsthand="WIDGET_ID"]{min-height:1260px}}</style>
 <div data-firsthand="WIDGET_ID"></div>
 <script src="${origin}/embed.js" async></script>`}</code></pre>
         <p className="text-ink-2">The style rule is what stops layout shift. Cards are fixed height and the grid has a fixed column count per breakpoint, so the builder knows the exact height before anything loads.</p>

@@ -57,10 +57,10 @@ export function SharePanel({ testimonial: t, workspace, onClose }: { testimonial
 
   return (
     <div className="fixed inset-0 z-40 flex items-end justify-center bg-ink/30 p-0 sm:items-center sm:p-6" onClick={onClose} role="dialog" aria-modal="true" aria-label="Share testimonial">
-      <div className="max-h-full w-full max-w-2xl overflow-y-auto rounded-sm border border-line bg-paper p-6 shadow-lg" onClick={(e) => e.stopPropagation()}>
+      <div className="max-h-full w-full max-w-2xl overflow-y-auto rounded-2xl border border-line bg-card p-6 shadow-lg" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="eyebrow">Share</p>
+            <p className="label-sm">Share</p>
             <p className="mt-1 font-medium">{who.display_name}{who.display_meta ? `, ${who.display_meta}` : ""}</p>
           </div>
           <Button variant="ghost" size="sm" onClick={onClose}>Close</Button>
@@ -78,7 +78,7 @@ export function SharePanel({ testimonial: t, workspace, onClose }: { testimonial
                 href={`/api/og/testimonial/${t.id}?size=${s.key}`}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-sm border border-line p-3 text-sm hover:border-ink"
+                className="rounded-2xl border border-line bg-card p-3 text-sm hover:border-ink"
               >
                 <span className="block font-medium">{s.label}</span>
                 <span className="block text-ink-2">{s.dims}</span>
@@ -119,7 +119,7 @@ export function SharePanel({ testimonial: t, workspace, onClose }: { testimonial
           )}
         </section>
 
-        <section className="mt-6 space-y-3 rounded-sm border border-line p-4">
+        <section className="mt-6 space-y-3 rounded-2xl border border-line bg-card p-4">
           <h3 className="text-sm font-medium">How it displays</h3>
           <div className="grid gap-3 sm:grid-cols-[10rem_1fr]">
             <Select value={highlightMode} onChange={(e) => setHighlightMode(e.target.value as HighlightMode)} aria-label="Highlight mode">

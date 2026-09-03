@@ -32,10 +32,9 @@ export function ImportPanel({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="fixed inset-0 z-40 flex items-end justify-center bg-ink/30 sm:items-center sm:p-6" onClick={onClose} role="dialog" aria-modal="true" aria-label="Import a review">
-      <form onSubmit={submit} className="w-full max-w-xl space-y-5 rounded-sm border border-line bg-paper p-6 shadow-lg" onClick={(e) => e.stopPropagation()}>
+      <form onSubmit={submit} className="w-full max-w-xl space-y-5 rounded-2xl border border-line bg-card p-6 shadow-lg" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="eyebrow">Import</p>
             <h2 className="mt-1 text-lg font-semibold">Paste a review from anywhere</h2>
             <p className="mt-1 text-sm text-ink-2">A Google review, a post on X, an email. We split out the name and the text; you approve it from the inbox.</p>
           </div>
@@ -43,7 +42,7 @@ export function ImportPanel({ onClose }: { onClose: () => void }) {
         </div>
 
         {done ? (
-          <div className="rounded-sm border border-ok/30 bg-ok/5 p-4 text-sm">
+          <div className="rounded-xl border border-ok/30 bg-ok/5 p-4 text-sm">
             <p className="font-medium text-ok">Imported. It is waiting in your inbox.</p>
             <div className="mt-3 flex gap-2">
               <Button type="button" size="sm" variant="secondary" onClick={() => { setDone(false); setText(""); setUrl(""); setConfirmed(false); }}>Import another</Button>

@@ -40,11 +40,11 @@ test.describe("dashboard", () => {
   test("demo sign in joins the sandbox and approving publishes to the wall", async ({ page }) => {
     await signInToDemo(page);
 
-    // Landed in the demo workspace inbox with the two pending seeds.
+    // Landed in the demo workspace with the Waiting tab open.
     await expect(page.getByText("Harbour Bookkeeping")).toBeVisible();
-    const heading = page.getByRole("heading", { name: /waiting for review/ });
-    await expect(heading).toBeVisible();
-    const pending = Number((await heading.textContent())?.match(/(\d+) waiting/)?.[1] ?? 0);
+    const waitingTab = page.getByRole("tab", { name: /Waiting/ });
+    await expect(waitingTab).toHaveAttribute("aria-selected", "true");
+    const pending = Number((await waitingTab.textContent())?.match(/(\d+)/)?.[1] ?? 0);
     expect(pending).toBeGreaterThan(0);
     await page.goto(`/w/${demo}`);
     const publicBefore = await page.locator("figure").count();
@@ -53,23 +53,22 @@ test.describe("dashboard", () => {
     // Approve with the keyboard: first row is selected, A approves.
     await page.locator("li[data-id]").first().click();
     await page.keyboard.press("a");
-    if (pending > 1) await expect(page.getByRole("heading", { name: new RegExp(`${pending - 1} waiting`) })).toBeVisible();
-    else await expect(page.getByRole("heading", { name: "Nothing waiting" })).toBeVisible();
+    await expect(page.getByRole("tab", { name: new RegExp(`Waiting\\s*${pending - 1}`) })).toBeVisible();
 
     // It is now public.
     await page.goto(`/w/${demo}`);
     await expect(page.locator("figure")).toHaveCount(publicBefore + 1);
 
-    // Testimonials page: search box, tabs and share panel render.
-    await page.goto("/app/testimonials");
-    await expect(page.getByRole("tab", { name: /approved/i })).toBeVisible();
+    // Approved tab: share panel renders with quote card links.
+    await page.goto("/app");
+    await page.getByRole("tab", { name: /Approved/ }).click();
     await page.getByRole("button", { name: "Share" }).first().click();
     await expect(page.getByRole("dialog")).toBeVisible();
     await expect(page.getByRole("link", { name: /Square/ })).toHaveAttribute("href", /\/api\/og\/testimonial\//);
     await page.keyboard.press("Escape");
 
     // Widgets: the builder previews and produces a snippet with reserved heights.
-    await page.goto("/app/widgets");
+    await page.goto("/app/show");
     await page.getByRole("link", { name: "Homepage wall" }).click();
     await expect(page.locator(".fh .fh-card").first()).toBeVisible();
     await expect(page.locator("pre")).toContainText("min-height");
@@ -91,8 +90,8 @@ test.describe("dashboard", () => {
     await expect(page.getByText("Check your inbox")).toBeVisible();
     await page.goto(await magicLinkFor(email));
     await expect(page).toHaveURL(/\/app/);
-    await expect(page.getByText("Nothing waiting")).toBeVisible();
-    await page.goto("/app/forms");
+    await expect(page.getByText("Nothing waiting").first()).toBeVisible();
+    await page.goto("/app/collect");
     await expect(page.getByText("Tell us how it went")).toBeVisible();
   });
 });

@@ -51,10 +51,9 @@ export function FormEditor({ form, workspace }: { form: Form; workspace: Workspa
 
   return (
     <div className="mx-auto w-full max-w-3xl px-6 py-8">
-      <Link href="/app/forms" className="text-sm text-ink-2 hover:text-ink">← Forms</Link>
+      <Link href="/app/collect" className="text-sm text-ink-2 hover:text-ink">← Collect</Link>
       <header className="mt-4 mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="eyebrow">Form</p>
           <h1 className="mt-1 text-xl font-semibold tracking-tight">{title || "Untitled"}</h1>
         </div>
         <div className="flex items-center gap-2">
@@ -85,7 +84,7 @@ export function FormEditor({ form, workspace }: { form: Form; workspace: Workspa
                 ["classic", "Classic form", "Name, rating, a text box. Fast and familiar. Still ends with the consent and identity step."],
               ] as Array<[FormMode, string, string]>
             ).map(([m, label, desc]) => (
-              <label key={m} className={cn("cursor-pointer rounded-sm border p-4", mode === m ? "border-ink bg-paper-2/60" : "border-line hover:border-ink-3")}>
+              <label key={m} className={cn("cursor-pointer rounded-2xl border p-4", mode === m ? "border-accent bg-accent-soft" : "border-line hover:border-line-strong")}>
                 <input type="radio" className="sr-only" checked={mode === m} onChange={() => setMode(m)} name="mode" />
                 <span className="block font-medium">{label}</span>
                 <span className="mt-1 block text-sm text-ink-2">{desc}</span>

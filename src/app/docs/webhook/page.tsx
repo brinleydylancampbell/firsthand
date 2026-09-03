@@ -24,7 +24,7 @@ export default function WebhookDocs() {
 
       <section className="mt-10 space-y-4">
         <h2 className="text-lg font-semibold">The request</h2>
-        <pre className="overflow-x-auto rounded-sm border border-line bg-paper-2 p-4 text-xs leading-relaxed"><code>{`POST ${origin}/api/hooks/YOUR_WORKSPACE
+        <pre className="overflow-x-auto rounded-2xl border border-line bg-paper-2 p-4 text-xs leading-relaxed"><code>{`POST ${origin}/api/hooks/YOUR_WORKSPACE
 Authorization: Bearer YOUR_SECRET
 Content-Type: application/json
 
@@ -54,7 +54,7 @@ Content-Type: application/json
 
       <section className="mt-10 space-y-4">
         <h2 className="text-lg font-semibold">curl</h2>
-        <pre className="overflow-x-auto rounded-sm border border-line bg-paper-2 p-4 text-xs leading-relaxed"><code>{`curl -X POST ${origin}/api/hooks/YOUR_WORKSPACE \\
+        <pre className="overflow-x-auto rounded-2xl border border-line bg-paper-2 p-4 text-xs leading-relaxed"><code>{`curl -X POST ${origin}/api/hooks/YOUR_WORKSPACE \\
   -H "Authorization: Bearer YOUR_SECRET" \\
   -H "Content-Type: application/json" \\
   -d '{"email":"jane@example.com","name":"Jane Doe","order_ref":"INV-1042"}'`}</code></pre>

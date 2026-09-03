@@ -22,7 +22,7 @@ Built for The Build Games, September 2026, as a replacement for Senja and Testim
 - Interview mode with a live draft panel, editable script per form, optional voice input
 - Classic form with the same consent and identity step
 - Paste import from Google, Trustpilot, X, LinkedIn or email, source kept for provenance
-- Inbox with keyboard shortcuts (J, K, A, H, F, E) and optimistic updates
+- One testimonials list with a Waiting tab, keyboard shortcuts (J, K, A, H, F, E) and optimistic updates
 - Automatic labels on approve: objection, outcome, tags, highlight sentence
 - Plain English search over the approved set
 - Wall of love with filter chips, dark mode, public "how this was collected" pages
@@ -90,14 +90,15 @@ The e2e suite covers: classic form to pending with the identity choice applied, 
 
 ## Stack
 
-Next.js 16 (App Router), TypeScript, Tailwind v4, Supabase (Postgres, Auth, Storage), Anthropic API, Resend, Vercel. No component library. Two fonts: Instrument Sans and Source Serif 4.
+Next.js 16 (App Router), TypeScript, Tailwind v4, Supabase (Postgres, Auth, Storage), Anthropic API, Resend, Vercel. No component library. Inter Tight for headings and quotes, Inter for body, IBM Plex Mono for data.
 
 ## Layout
 
 ```
 src/app/f/[ws]/[form]        public forms (interview or classic) and the thank-you page
 src/app/w/[ws]               wall of love, /t/[id] provenance
-src/app/app                  dashboard: inbox, testimonials, forms, widgets, asks, settings
+src/app/app                  dashboard: testimonials (waiting, approved, hidden), collect, show, settings
+src/components/site          the landing page, one section per file
 src/app/api/interview        streaming question and draft routes
 src/app/api/widget           embed fragments and the view beacon
 src/app/api/hooks/[ws]       the ask webhook
