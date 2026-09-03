@@ -1,8 +1,7 @@
-import { renderToStaticMarkup } from "react-dom/server";
 import { adminClient } from "@/lib/supabase/admin";
 import { averageRating, listApproved } from "@/lib/public";
 import { DEFAULT_WIDGET_CONFIG, type Theme, type Widget } from "@/lib/types";
-import { WidgetMarkup } from "@/lib/widget-markup";
+import { renderWidget } from "@/lib/widget-html";
 import { appUrl } from "@/lib/utils";
 
 const CACHE = "public, s-maxage=60, stale-while-revalidate=86400";
@@ -23,31 +22,27 @@ export async function GET(request: Request, ctx: RouteContext<"/api/widget/[id]"
   const admin = adminClient();
   const { data } = await admin
     .from("widget")
-    .select("id, type, config, workspace:workspace(slug)")
+    .select("id, type, config, workspace:workspace(id, slug)")
     .eq("id", id)
     .maybeSingle();
   if (!data) return new Response("<!-- widget not found -->", { status: 404, headers: { "Content-Type": "text/html", ...CORS } });
 
-  const widget = data as unknown as Widget & { workspace: { slug: string } };
+  const widget = data as unknown as Widget & { workspace: { id: string; slug: string } };
   const config = { ...DEFAULT_WIDGET_CONFIG, ...(widget.config ?? {}) };
   const theme: Theme = themeParam === "light" || themeParam === "dark" ? themeParam : config.theme ?? "auto";
+  const items = await listApproved(widget.workspace.id, config.filters, widget.type === "badge" ? 200 : config.count);
 
-  const { data: ws } = await admin.from("workspace").select("id").eq("slug", widget.workspace.slug).single();
-  const items = await listApproved(ws!.id, config.filters, widget.type === "badge" ? 200 : config.count);
-
-  const html = renderToStaticMarkup(
-    WidgetMarkup({
-      type: widget.type,
-      config,
-      items,
-      theme,
-      accent,
-      radius,
-      origin: appUrl(),
-      ws: widget.workspace.slug,
-      avg: averageRating(items),
-    }),
-  );
+  const html = renderWidget({
+    type: widget.type,
+    config,
+    items,
+    theme,
+    accent,
+    radius,
+    origin: appUrl(),
+    ws: widget.workspace.slug,
+    avg: averageRating(items),
+  });
 
   return new Response(html, {
     headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": CACHE, ...CORS },

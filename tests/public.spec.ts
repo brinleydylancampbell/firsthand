@@ -1,0 +1,56 @@
+import { expect, test } from "@playwright/test";
+
+const demo = process.env.DEMO_WORKSPACE_SLUG ?? "demo";
+
+test("wall shows approved testimonials with filter chips and dark mode", async ({ page }) => {
+  await page.goto(`/w/${demo}`);
+  await expect(page.getByRole("heading", { name: "What customers say" })).toBeVisible();
+  const cards = page.locator("figure");
+  await expect(cards).toHaveCount(9); // 12 seeded, 2 pending, 1 hidden
+
+  // Filter by an objection chip.
+  await page.getByRole("button", { name: "Worried about price" }).click();
+  await expect(page.locator("figure")).toHaveCount(2);
+  await page.getByRole("button", { name: "All" }).click();
+  await expect(page.locator("figure")).toHaveCount(9);
+
+  // Dark mode toggles a class.
+  await page.getByRole("button", { name: "Dark" }).click();
+  await expect(page.locator(".dark").first()).toBeVisible();
+
+  // Consent enforced: pending text never appears.
+  await expect(page.getByText("Payroll used to eat my Friday")).toHaveCount(0);
+});
+
+test("provenance page shows the real interview", async ({ page }) => {
+  await page.goto(`/w/${demo}`);
+  await page.getByRole("link", { name: "See how this was collected" }).first().click();
+  await expect(page.getByRole("heading", { name: /in the customer’s own words/ })).toBeVisible();
+  await expect(page.getByText("The conversation")).toBeVisible();
+  await expect(page.getByText("Asked").first()).toBeVisible();
+});
+
+test("classic form requires consent and lands in pending", async ({ page }) => {
+  await page.goto(`/f/${demo}/quick`);
+  await page.getByLabel("Your name").fill("Playwright Tester");
+  await page.getByLabel("Role").fill("QA");
+  await page.getByLabel("Company").fill("Test Co");
+  await page.getByLabel("What would you tell someone who is on the fence?").fill("Automated but heartfelt: the form works and the consent step is clear.");
+  await page.getByRole("button", { name: "Continue" }).click();
+  await expect(page.getByText("How should we show you?")).toBeVisible();
+  await page.getByText("First name and role").click();
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Send it" }).click();
+  await expect(page).toHaveURL(/\/thanks\//);
+  await expect(page.getByText("Playwright")).toBeVisible();
+  await expect(page.getByText("QA")).toBeVisible();
+  await expect(page.getByText("Test Co")).toHaveCount(0); // first name and role only
+});
+
+test("public pages have OG images", async ({ request }) => {
+  for (const path of [`/api/og/wall/${demo}`, `/api/og/form/${demo}/interview`]) {
+    const res = await request.get(path);
+    expect(res.ok(), path).toBeTruthy();
+    expect(res.headers()["content-type"]).toContain("image/png");
+  }
+});
