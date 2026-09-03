@@ -30,13 +30,13 @@ export function widgetCss(): string {
 .fh-initials{width:36px;height:36px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;background:var(--fh-line,rgba(128,128,128,.18));color:var(--fh-muted,#666)}
 .fh-who{min-width:0}
 .fh-name{font-weight:600;font-size:14px;line-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fh-meta{font-size:12px;line-height:16px;color:var(--fh-muted,#777);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fh-meta{font-size:12px;line-height:16px;color:var(--fh-muted,#6b6b6b);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fh-stars{display:inline-flex;gap:1px;margin-left:auto;flex:none}
 .fh-star{width:12px;height:12px;fill:var(--fh-accent,currentColor)}
 .fh-star.off{fill:var(--fh-line,rgba(128,128,128,.3))}
 .fh-body{margin-top:12px;font-size:15px;line-height:22px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .fh-body b{font-weight:600}
-.fh-foot{margin-top:auto;padding-top:10px;display:flex;align-items:center;gap:8px;font-size:12px;line-height:16px;color:var(--fh-muted,#777)}
+.fh-foot{margin-top:auto;padding-top:10px;display:flex;align-items:center;gap:8px;font-size:12px;line-height:16px;color:var(--fh-muted,#6b6b6b)}
 .fh-foot a{text-decoration:underline;text-underline-offset:2px}
 .fh-strip{display:flex;gap:${GAP}px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:${GAP}px;scrollbar-width:thin}
 .fh-strip .fh-card{flex:0 0 min(320px,85%);scroll-snap-align:start}
@@ -52,9 +52,9 @@ export function widgetCss(): string {
 .fh-stack .fh-avatar,.fh-stack .fh-initials{width:32px;height:32px;margin-left:-8px;border:2px solid var(--fh-card,#fff);font-size:11px}
 .fh-stack>:first-child{margin-left:0}
 .fh-badge-text{font-size:14px;line-height:18px;font-weight:600;display:block}
-.fh-badge-sub{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--fh-muted,#777)}
+.fh-badge-sub{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--fh-muted,#6b6b6b)}
 .fh-badge-sub .fh-stars{margin-left:0}
-.fh-empty{font-size:14px;color:var(--fh-muted,#777)}
+.fh-empty{font-size:14px;color:var(--fh-muted,#6b6b6b)}
 `.trim();
 }
 
@@ -65,7 +65,7 @@ function stars(rating: number | null): string {
   const s = [1, 2, 3, 4, 5]
     .map((i) => `<svg class="fh-star${i <= rating ? "" : " off"}" viewBox="0 0 20 20" aria-hidden="true"><path d="${STAR}"/></svg>`)
     .join("");
-  return `<span class="fh-stars" aria-label="${rating} out of 5">${s}</span>`;
+  return `<span class="fh-stars" role="img" aria-label="${rating} out of 5">${s}</span>`;
 }
 
 function initials(name: string): string {

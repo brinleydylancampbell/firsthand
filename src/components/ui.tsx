@@ -154,7 +154,7 @@ export function Skeleton({ className }: { className?: string }) {
 export function Stars({ rating, size = 14, className }: { rating: number | null; size?: number; className?: string }) {
   if (!rating) return null;
   return (
-    <span className={cn("inline-flex items-center gap-0.5", className)} aria-label={`${rating} out of 5 stars`}>
+    <span role="img" className={cn("inline-flex items-center gap-0.5", className)} aria-label={`${rating} out of 5 stars`}>
       {[1, 2, 3, 4, 5].map((i) => (
         <svg key={i} width={size} height={size} viewBox="0 0 20 20" aria-hidden className={i <= rating ? "text-ink" : "text-line"}>
           <path

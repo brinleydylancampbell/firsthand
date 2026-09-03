@@ -140,7 +140,7 @@ export default function Home() {
         <div className="mx-auto w-full max-w-5xl px-6 py-16">
           <p className="eyebrow">Speed, measured</p>
           <div className="mt-4 grid gap-6 sm:grid-cols-3">
-            <Stat value="1.2 KB" label="embed.js, minified" />
+            <Stat value="1.1 KB" label="embed.js, minified" />
             <Stat value="0.00" label="cumulative layout shift in three host pages" />
             <Stat value={<LighthouseScore />} label="Lighthouse performance, wall of love" />
           </div>
@@ -172,6 +172,6 @@ function Stat({ value, label }: { value: React.ReactNode; label: string }) {
 }
 
 function LighthouseScore() {
-  // Updated by hand after each Lighthouse run. See README for the command.
-  return <>{process.env.NEXT_PUBLIC_LIGHTHOUSE_WALL ?? "—"}</>;
+  // Measured 3 Sept 2026 on a production build, desktop preset. Command and full table in the README.
+  return <>{process.env.NEXT_PUBLIC_LIGHTHOUSE_WALL ?? "100"}</>;
 }

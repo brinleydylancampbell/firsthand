@@ -37,7 +37,7 @@ export function AsksView({
   const curl = `curl -X POST ${hookUrl} \\
   -H "Authorization: Bearer ${showSecret ? workspace.webhook_secret : "YOUR_SECRET"}" \\
   -H "Content-Type: application/json" \\
-  -d '{"email":"jane@example.com","name":"Jane Doe","order_ref":"INV-1042","delivered_at":"${new Date().toISOString()}"}'`;
+  -d '{"email":"jane@example.com","name":"Jane Doe","order_ref":"INV-1042","delivered_at":"2026-09-01T10:00:00Z"}'`;
 
   function run(fn: () => Promise<{ ok: boolean; message?: string }>, okNotice?: string) {
     setError(null);
@@ -110,7 +110,7 @@ export function AsksView({
                 <li key={a.id} className="px-3 py-2">
                   <p className="truncate font-medium">{a.name || a.email}</p>
                   <p className="truncate text-xs text-ink-3">{a.email}{a.order_ref ? ` · ${a.order_ref}` : ""}</p>
-                  <p className="text-xs text-ink-3">Sends {new Date(a.send_at).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</p>
+                  <p className="text-xs text-ink-3" suppressHydrationWarning>Sends {new Date(a.send_at).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</p>
                 </li>
               ))}
             </ul>
@@ -174,9 +174,9 @@ export function AsksView({
               <li key={a.id} className="flex flex-wrap items-center gap-3 py-3">
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-medium">{a.name || a.email}</p>
-                  <p className="truncate text-xs text-ink-3">{a.email}{a.order_ref ? ` · ${a.order_ref}` : ""} · created {relativeDate(a.created_at)}</p>
+                  <p className="truncate text-xs text-ink-3" suppressHydrationWarning>{a.email}{a.order_ref ? ` · ${a.order_ref}` : ""} · created {relativeDate(a.created_at)}</p>
                 </div>
-                <span className="text-xs text-ink-3">{a.status === "sent" && a.sent_at ? `sent ${relativeDate(a.sent_at)}` : `due ${new Date(a.send_at).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}`}</span>
+                <span className="text-xs text-ink-3" suppressHydrationWarning>{a.status === "sent" && a.sent_at ? `sent ${relativeDate(a.sent_at)}` : `due ${new Date(a.send_at).toLocaleDateString("en-GB", { day: "numeric", month: "short" })}`}</span>
                 <Badge tone={statusTone[a.status]}>{a.status}</Badge>
                 {a.status === "draft" || a.status === "scheduled" ? (
                   <Button size="sm" variant="ghost" disabled={pending} onClick={() => run(() => cancelAsk(a.id))}>Cancel</Button>

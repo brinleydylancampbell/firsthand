@@ -234,7 +234,7 @@ function Row({
             <span className="font-medium">{t.author_name || "No name given"}</span>
             {meta ? <span className="text-sm text-ink-2">{meta}</span> : null}
             <Stars rating={t.rating} className="ml-1" />
-            <span className="ml-auto text-xs text-ink-3">{relativeDate(t.created_at)}</span>
+            <span className="ml-auto text-xs text-ink-3" suppressHydrationWarning>{relativeDate(t.created_at)}</span>
           </div>
 
           {!editing ? (

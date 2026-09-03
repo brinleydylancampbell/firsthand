@@ -60,9 +60,9 @@ export default async function EmbedTestPage(props: PageProps<"/embed-test/[host]
   });
 
   return (
-    <div data-testid="host" style={{ fontFamily: h.font, background: h.bg, color: h.fg, minHeight: "100%", flex: 1 }}>
+    <main data-testid="host" style={{ fontFamily: h.font, background: h.bg, color: h.fg, minHeight: "100%", flex: 1 }}>
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "40px 24px" }}>
-        <p style={{ fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", opacity: 0.6 }}>Embed test host: {host}</p>
+        <p style={{ fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", opacity: 0.8 }}>Embed test host: {host}</p>
         <h1 style={{ fontSize: 34, margin: "12px 0 8px", lineHeight: 1.15 }}>{h.title}</h1>
         <p style={{ fontSize: 17, lineHeight: 1.6, maxWidth: 620, opacity: 0.85 }}>{h.blurb}</p>
 
@@ -72,14 +72,14 @@ export default async function EmbedTestPage(props: PageProps<"/embed-test/[host]
         <h2 style={{ fontSize: 22, margin: "48px 0 16px" }}>On the pricing page</h2>
         <div dangerouslySetInnerHTML={{ __html: single }} />
 
-        <p style={{ marginTop: 48, fontSize: 14, opacity: 0.7, lineHeight: 1.6 }}>
+        <p style={{ marginTop: 48, fontSize: 14, opacity: 0.85, lineHeight: 1.6 }}>
           Everything below the widgets should stay exactly where it was while they load. The heights above were reserved by
           the snippet before the script ran.
         </p>
-        <div data-testid="below" style={{ marginTop: 24, padding: 16, border: "1px dashed currentColor", opacity: 0.6 }}>
+        <div data-testid="below" style={{ marginTop: 24, padding: 16, border: "1px dashed currentColor", opacity: 0.8 }}>
           Anchor paragraph used by the layout shift test.
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -6,13 +6,16 @@ test("wall shows approved testimonials with filter chips and dark mode", async (
   await page.goto(`/w/${demo}`);
   await expect(page.getByRole("heading", { name: "What customers say" })).toBeVisible();
   const cards = page.locator("figure");
-  await expect(cards).toHaveCount(9); // 12 seeded, 2 pending, 1 hidden
+  await expect(cards.first()).toBeVisible();
+  const total = await cards.count();
+  expect(total).toBeGreaterThanOrEqual(9); // 12 seeded, 2 pending, 1 hidden, plus anything approved by other tests
 
   // Filter by an objection chip.
   await page.getByRole("button", { name: "Worried about price" }).click();
-  await expect(page.locator("figure")).toHaveCount(2);
+  await expect.poll(() => page.locator("figure").count()).toBeLessThan(total);
+  expect(await page.locator("figure").count()).toBeGreaterThan(0);
   await page.getByRole("button", { name: "All", exact: true }).click();
-  await expect(page.locator("figure")).toHaveCount(9);
+  await expect(cards).toHaveCount(total);
 
   // Dark mode toggles a class.
   await page.getByRole("button", { name: "Dark" }).click();

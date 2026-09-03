@@ -15,7 +15,7 @@ Built for The Build Games, September 2026, as a replacement for Senja and Testim
 | Remember to ask, weeks late | Your order or job system posts one line of JSON when something is delivered. Firsthand asks N days later. Nothing sends until you have previewed the email and gone live. |
 | Scroll 80 testimonials looking for the pricing one | On approve, each one is labelled with the doubt it answers, the outcome and tags. Filter chips, targeted widgets, and a plain English search that returns the best three. |
 | Hope people believe a quote and a headshot | Every testimonial keeps its origin. Turn on a link and visitors read the real interview or see the import source. |
-| Paste a script that tanks your Lighthouse score | A 1.2 KB script, one div, no iframe. Inherits your font. The snippet reserves the exact height per breakpoint so nothing shifts. |
+| Paste a script that tanks your Lighthouse score | A 1.1 KB script, one div, no iframe. Inherits your font. The snippet reserves the exact height per breakpoint so nothing shifts. |
 
 ## What is in
 
@@ -67,12 +67,15 @@ npx lighthouse https://your-domain/w/demo --only-categories=performance,accessib
 npx lighthouse https://your-domain/embed-test/serif --only-categories=performance --preset=desktop --quiet --chrome-flags="--headless"
 ```
 
-Latest scores are recorded below and on the landing page. Set `NEXT_PUBLIC_LIGHTHOUSE_WALL` to show the number there.
+Latest scores are recorded below and on the landing page.
 
 | Page | Performance | Accessibility | Best practices | SEO |
 |---|---|---|---|---|
-| `/w/demo` | pending first deploy | | | |
-| `/embed-test/serif` | pending first deploy | | | |
+| `/` landing | 100 | 100 | 100 | 100 |
+| `/w/demo` wall of love | 100 | 100 | 100 | 91 |
+| `/embed-test/serif` embed host | 100 | 100 | 96 | 60 (page is `noindex`, by design) |
+
+Measured 3 Sept 2026 against a local production build (`next build && next start`), desktop preset, Chrome headless. Cumulative layout shift was 0 on all three, largest contentful paint 0.6 s, total blocking time 0 ms. The embed host page is `noindex` and loads third-party placeholder avatars, which is where its SEO and best-practice points go.
 
 ## Tests
 
@@ -83,7 +86,7 @@ npm run build:embed && npm run check:embed
 npm run test:e2e      # Playwright against a seeded local dev server
 ```
 
-The e2e suite covers: classic form to pending with the identity choice applied, wall filter chips and dark mode, provenance page, embed rendering in three hosts with layout shift under 0.02 and inherited fonts, widget fragments never leaking pending or hidden testimonials, webhook auth, and an interview turn when a model key is present.
+The e2e suite covers: classic form to pending with the identity choice applied, wall filter chips and dark mode, provenance page, embed rendering in three hosts with layout shift under 0.02 and inherited fonts, widget fragments never leaking pending or hidden testimonials, webhook auth, an interview turn when a model key is present, and (with the local mail catcher) magic link sign in for both the demo sandbox and a fresh workspace, keyboard approve to the wall, the share panel, the widget builder and a webhook test event.
 
 ## Stack
 
