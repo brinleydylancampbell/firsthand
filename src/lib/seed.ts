@@ -1,5 +1,6 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { DEFAULT_QUESTIONS, type InterviewTurn, type Objection } from "./types";
+import { ensureBuckets } from "./storage";
 
 /**
  * The demo workspace a judge lands in. Twelve testimonials, three forms, two
@@ -322,6 +323,7 @@ function consent(ws: string) {
 }
 
 export async function seedDemo(admin: SupabaseClient, slug: string): Promise<{ workspaceId: string }> {
+  await ensureBuckets(admin);
   // Workspace: keep the id if it exists so shared links survive the reset.
   const { data: existing } = await admin.from("workspace").select("id").eq("slug", slug).maybeSingle();
   let workspaceId = existing?.id as string | undefined;

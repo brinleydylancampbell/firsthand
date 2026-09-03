@@ -205,14 +205,6 @@ create policy "members read widget views" on public.widget_view
   for select to authenticated
   using (exists (select 1 from public.widget w where w.id = widget_id and public.is_member(w.workspace_id)));
 
--- ---------------------------------------------------------------------------
--- Storage: public read, writes only from the server after resizing
--- ---------------------------------------------------------------------------
-insert into storage.buckets (id, name, public)
-values ('avatars', 'avatars', true), ('brand', 'brand', true)
-on conflict (id) do nothing;
-
-create policy "public read avatars" on storage.objects
-  for select to public using (bucket_id = 'avatars');
-create policy "public read brand" on storage.objects
-  for select to public using (bucket_id = 'brand');
+-- Storage buckets (avatars, brand) are created by the app on first use via the
+-- Storage API, so this migration also works on a fresh local stack where the
+-- storage schema does not exist yet.

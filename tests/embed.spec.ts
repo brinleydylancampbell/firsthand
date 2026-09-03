@@ -26,7 +26,7 @@ for (const host of ["serif", "sans", "dark"] as const) {
     await expect(page.locator(".fh-single")).toBeVisible();
 
     // Font is inherited from the host, not injected.
-    const hostFont = await page.evaluate(() => getComputedStyle(document.body.firstElementChild as Element).fontFamily);
+    const hostFont = await page.getByTestId("host").evaluate((el) => getComputedStyle(el).fontFamily);
     const cardFont = await cards.first().evaluate((el) => getComputedStyle(el).fontFamily);
     expect(cardFont).toBe(hostFont);
 

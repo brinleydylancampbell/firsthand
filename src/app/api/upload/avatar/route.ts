@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import sharp from "sharp";
 import { adminClient } from "@/lib/supabase/admin";
+import { ensureBuckets } from "@/lib/storage";
 
 const MAX_BYTES = 6 * 1024 * 1024;
 
@@ -35,6 +36,7 @@ export async function POST(request: Request) {
 
   const path = `${randomUUID()}.webp`;
   const admin = adminClient();
+  await ensureBuckets(admin);
   const { error } = await admin.storage.from("avatars").upload(path, buffer, {
     contentType: "image/webp",
     cacheControl: "31536000",

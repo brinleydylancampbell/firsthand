@@ -60,7 +60,7 @@ export default async function EmbedTestPage(props: PageProps<"/embed-test/[host]
   });
 
   return (
-    <div style={{ fontFamily: h.font, background: h.bg, color: h.fg, minHeight: "100%", flex: 1 }}>
+    <div data-testid="host" style={{ fontFamily: h.font, background: h.bg, color: h.fg, minHeight: "100%", flex: 1 }}>
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "40px 24px" }}>
         <p style={{ fontSize: 12, letterSpacing: "0.08em", textTransform: "uppercase", opacity: 0.6 }}>Embed test host: {host}</p>
         <h1 style={{ fontSize: 34, margin: "12px 0 8px", lineHeight: 1.15 }}>{h.title}</h1>

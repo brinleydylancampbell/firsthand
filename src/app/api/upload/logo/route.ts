@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import sharp from "sharp";
 import { adminClient } from "@/lib/supabase/admin";
+import { ensureBuckets } from "@/lib/storage";
 import { createClient } from "@/lib/supabase/server";
 
 /** Owner only. Logo scaled to 112px tall, transparent PNG preserved. */
@@ -25,6 +26,7 @@ export async function POST(request: Request) {
 
   const path = `${user.id}/${randomUUID()}.png`;
   const admin = adminClient();
+  await ensureBuckets(admin);
   const { error } = await admin.storage.from("brand").upload(path, buffer, { contentType: "image/png", cacheControl: "31536000" });
   if (error) return Response.json({ error: "Upload failed." }, { status: 500 });
   return Response.json({ url: admin.storage.from("brand").getPublicUrl(path).data.publicUrl });

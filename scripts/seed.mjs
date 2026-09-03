@@ -2,7 +2,6 @@
 //   node --env-file=.env.local scripts/seed.mjs
 import { build } from "esbuild";
 import { mkdirSync } from "node:fs";
-import { pathToFileURL } from "node:url";
 
 mkdirSync(".next", { recursive: true });
 await build({
@@ -16,5 +15,5 @@ await build({
   logLevel: "silent",
 });
 
-const mod = await import(pathToFileURL(new URL("../.next/seed.mjs", import.meta.url).pathname).href);
+const mod = await import(new URL("../.next/seed.mjs", import.meta.url).href);
 await mod.seedFromEnv();

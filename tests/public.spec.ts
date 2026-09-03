@@ -11,7 +11,7 @@ test("wall shows approved testimonials with filter chips and dark mode", async (
   // Filter by an objection chip.
   await page.getByRole("button", { name: "Worried about price" }).click();
   await expect(page.locator("figure")).toHaveCount(2);
-  await page.getByRole("button", { name: "All" }).click();
+  await page.getByRole("button", { name: "All", exact: true }).click();
   await expect(page.locator("figure")).toHaveCount(9);
 
   // Dark mode toggles a class.
@@ -32,9 +32,9 @@ test("provenance page shows the real interview", async ({ page }) => {
 
 test("classic form requires consent and lands in pending", async ({ page }) => {
   await page.goto(`/f/${demo}/quick`);
-  await page.getByLabel("Your name").fill("Playwright Tester");
-  await page.getByLabel("Role").fill("QA");
-  await page.getByLabel("Company").fill("Test Co");
+  await page.getByRole("textbox", { name: "Your name" }).fill("Playwright Tester");
+  await page.getByLabel("Role", { exact: true }).fill("QA");
+  await page.getByLabel("Company", { exact: true }).fill("Test Co");
   await page.getByLabel("What would you tell someone who is on the fence?").fill("Automated but heartfelt: the form works and the consent step is clear.");
   await page.getByRole("button", { name: "Continue" }).click();
   await expect(page.getByText("How should we show you?")).toBeVisible();
