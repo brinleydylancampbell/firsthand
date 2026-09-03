@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { appUrl } from "@/lib/utils";
+import { Logo } from "@/components/logo";
 
 export const metadata: Metadata = { title: "Embed docs", description: "How the Firsthand embed works: one script, one div, no iframe, no tracking." };
 
@@ -8,7 +9,7 @@ export default function EmbedDocs() {
   const origin = appUrl();
   return (
     <main className="mx-auto w-full max-w-2xl px-6 py-16">
-      <Link href="/" className="eyebrow">Firsthand</Link>
+      <Logo size={28} />
       <h1 className="mt-3 text-2xl font-semibold tracking-tight">The embed</h1>
       <p className="mt-3 text-lg text-ink-2">One script tag and a div. No iframe. Inherits your font. Reserves its height so your page never shifts. Under 5 KB.</p>
 

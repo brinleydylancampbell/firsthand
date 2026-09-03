@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui";
+import { Logo } from "@/components/logo";
 
 const demo = process.env.DEMO_WORKSPACE_SLUG ?? "demo";
 
@@ -60,7 +61,7 @@ export default function Home() {
   return (
     <main className="flex-1">
       <header className="mx-auto flex w-full max-w-5xl items-center justify-between px-6 py-6">
-        <span className="eyebrow text-ink">Firsthand</span>
+        <Logo size={30} priority />
         <nav className="flex items-center gap-4 text-sm">
           <Link href="/docs/embed" className="text-ink-2 hover:text-ink">Embed</Link>
           <Link href="/docs/webhook" className="text-ink-2 hover:text-ink">Webhook</Link>
@@ -152,7 +153,7 @@ export default function Home() {
 
       <footer className="border-t border-line">
         <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-8 text-sm text-ink-3">
-          <span>Firsthand. Built for The Build Games, September 2026.</span>
+          <span className="inline-flex items-center gap-2"><Logo size={20} wordmark={false} href={null} /> Firsthand. Built for The Build Games, September 2026.</span>
           <a href="https://github.com/brinleydylancampbell/firsthand" rel="noreferrer" target="_blank" className="underline underline-offset-2 hover:text-ink">
             github.com/brinleydylancampbell/firsthand
           </a>

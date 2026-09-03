@@ -12,7 +12,7 @@ export async function saveSettings(fields: { name: string; brand: Brand; provena
   const name = fields.name.trim();
   if (name.length < 2) return { ok: false, message: "Give the workspace a name." };
   const accent = fields.brand.accent?.trim() || null;
-  if (accent && !/^#[0-9a-fA-F]{6}$/.test(accent)) return { ok: false, message: "Accent must be a six digit hex colour, like #1d4ed8." };
+  if (accent && !/^#[0-9a-fA-F]{6}$/.test(accent)) return { ok: false, message: "Accent must be a six digit hex colour, like #7858d8." };
   const brand: Brand = {
     logo_url: fields.brand.logo_url || null,
     accent,

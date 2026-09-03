@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import type { Workspace } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/logo";
 
 /**
  * Wrapper for every public page. Applies the workspace accent and font, shows
@@ -34,11 +35,9 @@ export function BrandFrame({
       </header>
       <div className="flex-1">{children}</div>
       <footer className={cn("mx-auto w-full px-6 py-8 text-xs text-ink-3", wide ? "max-w-6xl" : "max-w-2xl")}>
-        Collected with{" "}
-        <Link href="/" className="underline underline-offset-2 hover:text-ink">
-          Firsthand
-        </Link>
-        . Nothing here is published without the customer’s consent.
+        <span className="inline-flex flex-wrap items-center gap-x-1.5 gap-y-1">
+          Collected with <Logo size={16} className="text-xs font-medium underline-offset-2 hover:underline" />. Nothing here is published without the customer’s consent.
+        </span>
       </footer>
     </div>
   );

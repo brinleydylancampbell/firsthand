@@ -23,7 +23,7 @@ export async function renderAsk(workspace: Workspace, ask: Pick<Ask, "name" | "e
   const vars = { name: firstName, link, workspace: workspace.name };
   const subject = fillTemplate(workspace.ask_subject || DEFAULT_ASK_SUBJECT, vars);
   const body = fillTemplate(workspace.ask_body || DEFAULT_ASK_BODY, vars);
-  const element = AskEmail({ body, link, workspaceName: workspace.name, accent: workspace.brand?.accent ?? "#1d4ed8" });
+  const element = AskEmail({ body, link, workspaceName: workspace.name, accent: workspace.brand?.accent ?? "#7858d8" });
   const [html, text] = await Promise.all([render(element), render(element, { plainText: true })]);
   return { subject, html, text, link };
 }

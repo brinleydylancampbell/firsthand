@@ -10,7 +10,7 @@ export async function GET(_request: Request, ctx: RouteContext<"/api/og/wall/[ws
   if (!workspace) return new Response("Not found", { status: 404 });
   const items = await listApproved(workspace.id, {}, 60);
   const avg = averageRating(items);
-  const accent = workspace.brand?.accent || "#1d4ed8";
+  const accent = workspace.brand?.accent || "#7858d8";
   const faces = items.filter((t) => t.avatar_url).slice(0, 6);
   const lead = items.find((t) => t.featured && t.highlight) ?? items.find((t) => t.highlight) ?? items[0];
 

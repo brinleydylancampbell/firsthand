@@ -9,7 +9,7 @@ import { CopyButton } from "@/components/copy-button";
 
 export function SettingsForm({ workspace, email }: { workspace: Workspace; email: string }) {
   const [name, setName] = useState(workspace.name);
-  const [accent, setAccent] = useState(workspace.brand?.accent ?? "#1d4ed8");
+  const [accent, setAccent] = useState(workspace.brand?.accent ?? "#7858d8");
   const [font, setFont] = useState<"sans" | "serif">(workspace.brand?.font === "serif" ? "serif" : "sans");
   const [logo, setLogo] = useState<string | null>(workspace.brand?.logo_url ?? null);
   const [provenance, setProvenance] = useState(workspace.provenance_default);
@@ -75,7 +75,7 @@ export function SettingsForm({ workspace, email }: { workspace: Workspace; email
           <div className="grid gap-4 sm:grid-cols-[1fr_1fr]">
             <Field label="Accent colour" htmlFor="accent" hint="Stars, links and the consent checkbox on public pages.">
               <div className="flex gap-2">
-                <input type="color" value={/^#[0-9a-fA-F]{6}$/.test(accent) ? accent : "#1d4ed8"} onChange={(e) => setAccent(e.target.value)} aria-label="Pick accent colour" className="h-10 w-12 cursor-pointer rounded-sm border border-line bg-paper p-1" />
+                <input type="color" value={/^#[0-9a-fA-F]{6}$/.test(accent) ? accent : "#7858d8"} onChange={(e) => setAccent(e.target.value)} aria-label="Pick accent colour" className="h-10 w-12 cursor-pointer rounded-sm border border-line bg-paper p-1" />
                 <Input id="accent" value={accent} onChange={(e) => setAccent(e.target.value)} className="font-mono" />
               </div>
             </Field>

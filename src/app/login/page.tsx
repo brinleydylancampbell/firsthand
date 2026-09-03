@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LoginForm } from "@/components/login-form";
+import { Logo } from "@/components/logo";
 
 export const metadata: Metadata = { title: "Sign in" };
 
@@ -11,9 +12,7 @@ export default async function LoginPage(props: PageProps<"/login">) {
 
   return (
     <main className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center px-6 py-16">
-      <Link href="/" className="eyebrow mb-10 inline-block">
-        Firsthand
-      </Link>
+      <Logo size={32} className="mb-10 self-start" />
       <h1 className="text-xl font-semibold tracking-tight">Sign in</h1>
       <p className="mt-2 mb-8 text-ink-2">
         New here? The same link creates your workspace.

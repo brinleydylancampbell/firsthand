@@ -10,7 +10,7 @@ export async function GET(_request: Request, ctx: RouteContext<"/api/og/form/[ws
   if (!workspace) return new Response("Not found", { status: 404 });
   const { data: form } = await adminClient().from("form").select("title, intro, mode").eq("workspace_id", workspace.id).eq("slug", formSlug).maybeSingle();
   if (!form) return new Response("Not found", { status: 404 });
-  const accent = workspace.brand?.accent || "#1d4ed8";
+  const accent = workspace.brand?.accent || "#7858d8";
 
   return new ImageResponse(
     (

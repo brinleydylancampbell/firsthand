@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { appUrl } from "@/lib/utils";
+import { Logo } from "@/components/logo";
 
 export const metadata: Metadata = { title: "Webhook docs", description: "Ask for a testimonial at the right moment. One POST from your order or job system." };
 
@@ -8,7 +9,7 @@ export default function WebhookDocs() {
   const origin = appUrl();
   return (
     <main className="mx-auto w-full max-w-2xl px-6 py-16">
-      <Link href="/" className="eyebrow">Firsthand</Link>
+      <Logo size={28} />
       <h1 className="mt-3 text-2xl font-semibold tracking-tight">Ask at the right moment</h1>
       <p className="mt-3 text-lg text-ink-2">
         Asking the same day gets answers. Asking a month later does not. Post one line of JSON when a job or order is done and Firsthand sends the interview link after the delay you set.

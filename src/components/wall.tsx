@@ -6,6 +6,7 @@ import { OBJECTION_LABELS, type Objection, type PublicTestimonial, type Workspac
 import { useDarkMode } from "@/lib/use-theme";
 import { cn } from "@/lib/utils";
 import { Avatar, Stars } from "@/components/ui";
+import { Logo } from "@/components/logo";
 
 type Chip = { key: string; label: string; test: (t: PublicTestimonial) => boolean };
 
@@ -102,11 +103,9 @@ export function Wall({ workspace, items }: { workspace: Workspace; items: Public
       </main>
 
       <footer className="mx-auto w-full max-w-6xl px-6 py-8 text-xs text-ink-3">
-        Collected with{" "}
-        <Link href="/" className="underline underline-offset-2 hover:text-ink">
-          Firsthand
-        </Link>
-        . Nothing here is published without the customer’s consent.
+        <span className="inline-flex flex-wrap items-center gap-x-1.5 gap-y-1">
+          Collected with <Logo size={16} className="text-xs font-medium underline-offset-2 hover:underline" />. Nothing here is published without the customer’s consent.
+        </span>
       </footer>
     </div>
   );

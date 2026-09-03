@@ -33,7 +33,7 @@ export async function GET(request: Request, ctx: RouteContext<"/api/og/testimoni
         displayMeta={who.display_meta}
         avatar={t.identity_mode === "anonymous" ? null : t.avatar_url}
         rating={t.rating}
-        accent={t.workspace.brand?.accent || "#1d4ed8"}
+        accent={t.workspace.brand?.accent || "#7858d8"}
         workspaceName={t.workspace.name}
         logo={t.workspace.brand?.logo_url}
       />

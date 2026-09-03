@@ -1,8 +1,10 @@
 import { ButtonLink } from "@/components/ui";
+import { Logo } from "@/components/logo";
 
 export default function NotFound() {
   return (
     <main className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center px-6 py-24">
+      <Logo size={28} className="mb-8 self-start" />
       <p className="eyebrow">Not found</p>
       <h1 className="mt-2 text-xl font-semibold tracking-tight">There is nothing at this address</h1>
       <p className="mt-2 text-ink-2">
