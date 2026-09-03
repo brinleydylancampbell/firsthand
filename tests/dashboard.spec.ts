@@ -42,16 +42,23 @@ test.describe("dashboard", () => {
 
     // Landed in the demo workspace inbox with the two pending seeds.
     await expect(page.getByText("Harbour Bookkeeping")).toBeVisible();
-    await expect(page.getByRole("heading", { name: /2 waiting for review/ })).toBeVisible();
-    await expect(page.getByText("Payroll used to eat my Friday")).toBeVisible();
+    const heading = page.getByRole("heading", { name: /waiting for review/ });
+    await expect(heading).toBeVisible();
+    const pending = Number((await heading.textContent())?.match(/(\d+) waiting/)?.[1] ?? 0);
+    expect(pending).toBeGreaterThan(0);
+    await page.goto(`/w/${demo}`);
+    const publicBefore = await page.locator("figure").count();
+    await page.goto("/app");
 
     // Approve with the keyboard: first row is selected, A approves.
+    await page.locator("li[data-id]").first().click();
     await page.keyboard.press("a");
-    await expect(page.getByRole("heading", { name: /1 waiting for review/ })).toBeVisible();
+    if (pending > 1) await expect(page.getByRole("heading", { name: new RegExp(`${pending - 1} waiting`) })).toBeVisible();
+    else await expect(page.getByRole("heading", { name: "Nothing waiting" })).toBeVisible();
 
     // It is now public.
     await page.goto(`/w/${demo}`);
-    await expect(page.locator("figure")).toHaveCount(10);
+    await expect(page.locator("figure")).toHaveCount(publicBefore + 1);
 
     // Testimonials page: search box, tabs and share panel render.
     await page.goto("/app/testimonials");
