@@ -5,7 +5,6 @@ import { getWorkspaceBySlug } from "@/lib/workspace";
 import type { Form } from "@/lib/types";
 import { BrandFrame } from "@/components/brand-frame";
 import { ClassicForm } from "@/components/classic-form";
-import { Interview } from "@/components/interview";
 
 async function load(ws: string, formSlug: string) {
   const workspace = await getWorkspaceBySlug(ws);
@@ -38,11 +37,10 @@ export default async function FormPage(props: PageProps<"/f/[ws]/[form]">) {
   if (!data) notFound();
   const { workspace, form } = data;
   const askToken = typeof sp.ask === "string" ? sp.ask : undefined;
-  const chat = form.mode === "chat";
 
   return (
-    <BrandFrame workspace={workspace} wide={chat}>
-      <main className={chat ? "mx-auto w-full max-w-5xl px-6 py-10" : "mx-auto w-full max-w-2xl px-6 py-10"}>
+    <BrandFrame workspace={workspace}>
+      <main className="mx-auto w-full max-w-2xl px-6 py-10">
         <div className="max-w-2xl">
           <h1 className="text-xl font-semibold tracking-tight">{form.title}</h1>
           {form.intro ? <p className="mt-2 text-ink-2">{form.intro}</p> : null}
@@ -51,7 +49,7 @@ export default async function FormPage(props: PageProps<"/f/[ws]/[form]">) {
           ) : null}
         </div>
         <div className="mt-10">
-          {chat ? <Interview workspace={workspace} form={form} askToken={askToken} /> : <ClassicForm workspace={workspace} form={form} askToken={askToken} />}
+          <ClassicForm workspace={workspace} form={form} askToken={askToken} />
         </div>
       </main>
     </BrandFrame>

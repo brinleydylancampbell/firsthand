@@ -17,7 +17,7 @@ const Payload = z.object({
  *   Authorization: Bearer {webhook secret}
  *   { "email": "...", "name": "...", "order_ref": "...", "delivered_at": "2026-09-01T10:00:00Z" }
  *
- * Schedules an interview invitation for delivered_at + the workspace delay.
+ * Schedules an invitation for delivered_at + the workspace delay.
  * While the workspace is in draft mode nothing is ever sent; the ask waits
  * in the dashboard for the owner to preview and go live.
  */

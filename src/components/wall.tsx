@@ -127,7 +127,7 @@ function ChipButton({ active, onClick, children }: { active: boolean; onClick: (
 }
 
 export function WallCard({ t, ws }: { t: PublicTestimonial; ws: string }) {
-  const src = t.source === "import" ? sourceLabel[t.source_label ?? ""] ?? "Imported review" : t.source === "interview" ? "Interview" : null;
+  const src = t.source === "import" ? sourceLabel[t.source_label ?? ""] ?? "Imported review" : null;
   return (
     <figure className="mb-4 break-inside-avoid rounded-2xl border border-line bg-card p-5">
       <div className="flex items-center gap-3">

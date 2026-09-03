@@ -12,7 +12,7 @@ export default function WebhookDocs() {
       <Logo size={28} />
       <h1 className="mt-3 text-2xl font-semibold tracking-tight">Ask at the right moment</h1>
       <p className="mt-3 text-lg text-ink-2">
-        Asking the same day gets answers. Asking a month later does not. Post one line of JSON when a job or order is done and Firsthand sends the interview link after the delay you set.
+        Asking the same day gets answers. Asking a month later does not. Post one line of JSON when a job or order is done and Firsthand sends the link after the delay you set.
       </p>
 
       <section className="mt-10 space-y-4">

@@ -212,7 +212,6 @@ function Row({
   onDelete: () => void;
   onSaved: (fields: Partial<Testimonial>) => void;
 }) {
-  const [showTranscript, setShowTranscript] = useState(false);
   const meta = [t.author_role, t.author_company].filter(Boolean).join(", ");
   const identityNote =
     t.identity_mode === "anonymous" ? "Shows as “Verified customer”" : t.identity_mode === "first_role" ? "Shows first name and role" : null;
@@ -246,7 +245,7 @@ function Row({
           )}
 
           <div className="mt-3 flex flex-wrap items-center gap-1.5">
-            <Badge tone="outline">{t.source === "interview" ? "Interview" : t.source === "import" ? "Imported" : "Form"}</Badge>
+            <Badge tone="outline">{t.source === "import" ? "Imported" : "Form"}</Badge>
             {t.consent_public ? <Badge tone="ok">Consent given</Badge> : <Badge tone="danger">No consent</Badge>}
             {t.status !== "pending" ? <Badge>{statusLabel[t.status]}</Badge> : null}
             {t.featured ? <Badge tone="accent">Featured</Badge> : null}
@@ -277,23 +276,7 @@ function Row({
               <Button size="sm" variant="secondary" onClick={onFeature}>{t.featured ? "Unfeature" : "Feature"}</Button>
               <Button size="sm" variant="ghost" onClick={onEdit}>Edit</Button>
               <Button size="sm" variant="ghost" className="text-danger" onClick={onDelete}>Delete</Button>
-              {t.raw_transcript?.length ? (
-                <Button size="sm" variant="ghost" className="ml-auto" onClick={() => setShowTranscript((s) => !s)}>
-                  {showTranscript ? "Hide the conversation" : "See the conversation"}
-                </Button>
-              ) : null}
             </div>
-          ) : null}
-
-          {selected && showTranscript && t.raw_transcript?.length ? (
-            <ol className="mt-4 space-y-3 border-l border-line pl-4 text-sm">
-              {t.raw_transcript.map((turn, i) => (
-                <li key={i}>
-                  <p className="label-sm">{turn.role === "interviewer" ? "Asked" : "Answered"}</p>
-                  <p className={cn("mt-0.5", turn.role === "customer" ? "text-ink" : "text-ink-2")}>{turn.text}</p>
-                </li>
-              ))}
-            </ol>
           ) : null}
         </div>
       </div>

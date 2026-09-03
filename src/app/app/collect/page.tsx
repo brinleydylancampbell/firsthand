@@ -5,7 +5,7 @@ import { requireWorkspace } from "@/lib/workspace";
 import type { Ask, Form } from "@/lib/types";
 import { appUrl } from "@/lib/utils";
 import { createForm } from "@/app/app/forms/actions";
-import { Badge, Button, ButtonLink, EmptyState } from "@/components/ui";
+import { Button, ButtonLink, EmptyState } from "@/components/ui";
 import { CopyButton } from "@/components/copy-button";
 
 export const metadata: Metadata = { title: "Collect" };
@@ -42,7 +42,7 @@ export default async function CollectPage() {
           <div className="mt-3">
             <EmptyState
               title="No forms yet"
-              body="A form is a link you send customers. Interview mode asks a few questions and drafts the testimonial for them."
+              body="A form is a link you send customers. It ends with the consent and identity step, so nothing is public without their say-so."
               action={
                 <form action={createForm}>
                   <Button type="submit" variant="secondary">Create your first form</Button>
@@ -62,7 +62,6 @@ export default async function CollectPage() {
                     </Link>
                     <p className="mt-0.5 truncate text-sm text-ink-2">{url.replace(/^https?:\/\//, "")}</p>
                   </div>
-                  <Badge tone={f.mode === "chat" ? "accent" : "neutral"}>{f.mode === "chat" ? "Interview" : "Classic"}</Badge>
                   <span className="text-sm text-ink-3">{byForm.get(f.id) ?? 0} received</span>
                   <CopyButton text={url} label="Copy link" />
                 </li>
@@ -78,7 +77,7 @@ export default async function CollectPage() {
           <div>
             <p className="font-medium">{live ? "Live. Due asks are being sent." : "Draft mode. Nothing sends."}</p>
             <p className="mt-1 text-sm text-ink-2">
-              {queued ? `${queued} queued.` : "Nothing queued."} Your order system posts one line when a job is done; Firsthand emails an interview link {workspace.ask_delay_days} {workspace.ask_delay_days === 1 ? "day" : "days"} later.
+              {queued ? `${queued} queued.` : "Nothing queued."} Your order system posts one line when a job is done; Firsthand emails a link to your form {workspace.ask_delay_days} {workspace.ask_delay_days === 1 ? "day" : "days"} later.
             </p>
           </div>
           <ButtonLink href="/app/asks" variant="secondary">{live || queued ? "Manage asks" : "Set up asks"}</ButtonLink>

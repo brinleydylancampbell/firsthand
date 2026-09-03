@@ -52,11 +52,7 @@ export default async function ProvenancePage(props: PageProps<"/w/[ws]/t/[id]">)
           ← Back to the wall
         </Link>
         <h1 className="mt-2 text-xl font-semibold tracking-tight">
-          {t.source === "interview"
-            ? "A short interview, in the customer’s own words"
-            : t.source === "import"
-              ? `Imported from ${sourceName[t.provenance?.source_label ?? "other"] ?? "another source"}`
-              : "Submitted through a form"}
+          {t.source === "import" ? `Imported from ${sourceName[t.provenance?.source_label ?? "other"] ?? "another source"}` : "Submitted by the customer, with consent"}
         </h1>
 
         <figure className="mt-8 rounded-2xl border border-line bg-card p-5">
@@ -70,23 +66,6 @@ export default async function ProvenancePage(props: PageProps<"/w/[ws]/t/[id]">)
           </div>
           <blockquote className="mt-4 font-serif text-lg leading-relaxed">{t.body}</blockquote>
         </figure>
-
-        {t.source === "interview" && t.raw_transcript?.length ? (
-          <section className="mt-10">
-            <h2 className="text-sm font-medium">The conversation</h2>
-            <p className="mt-1 text-sm text-ink-2">
-              The testimonial above was drafted from these answers and approved by the customer before it was submitted.
-            </p>
-            <ol className="mt-5 space-y-5">
-              {t.raw_transcript.map((turn, i) => (
-                <li key={i} className={turn.role === "customer" ? "pl-6" : ""}>
-                  <p className="label-sm">{turn.role === "interviewer" ? "Asked" : "Answered"}</p>
-                  <p className={turn.role === "customer" ? "mt-1 font-serif text-[1.05rem] leading-relaxed" : "mt-1 text-ink-2"}>{turn.text}</p>
-                </li>
-              ))}
-            </ol>
-          </section>
-        ) : null}
 
         {t.source === "import" ? (
           <section className="mt-10 text-sm text-ink-2">

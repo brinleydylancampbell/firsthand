@@ -8,7 +8,7 @@ import { BADGE_H, CARD_H, GAP, SINGLE_H } from "./widget-size";
  * host font, and read CSS variables so hosts can restyle without our CSS.
  */
 
-const sourceLabel: Record<string, string> = { interview: "Interview", classic: "Form", import: "Review" };
+const sourceLabel: Record<string, string> = { classic: "Form", import: "Review" };
 
 export function esc(s: string): string {
   return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);

@@ -114,7 +114,7 @@ export function SettingsForm({ workspace, email }: { workspace: Workspace; email
             <input type="checkbox" className="mt-0.5 h-4 w-4" checked={provenance} onChange={(e) => setProvenance(e.target.checked)} />
             <span>
               Show “see how this was collected” on new testimonials by default
-              <span className="block text-xs text-ink-3">Each testimonial can still be switched individually from the share panel. The link opens the real interview or the import source.</span>
+              <span className="block text-xs text-ink-3">Each testimonial can still be switched individually from the share panel. The link shows when consent was given, how the customer chose to be named, and the source of any import.</span>
             </span>
           </label>
         </section>

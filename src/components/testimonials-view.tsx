@@ -48,7 +48,10 @@ export function TestimonialsView({ workspace, items }: { workspace: Workspace; i
     <div className="mx-auto w-full max-w-3xl px-6 py-8">
       <header className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="mt-1 text-xl font-semibold tracking-tight">{items.length} collected</h1>
+          <h1 className="text-xl font-semibold tracking-tight">Testimonials</h1>
+          <p className="mt-1 text-sm text-ink-2">
+            {counts.pending ? `${counts.pending} waiting for review` : "Nothing waiting"} · {counts.approved} live on your wall
+          </p>
         </div>
         <Button variant="secondary" onClick={() => setImporting(true)}>
           Import a review

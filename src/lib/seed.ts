@@ -1,5 +1,5 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { DEFAULT_QUESTIONS, type InterviewTurn, type Objection } from "./types";
+import type { Objection } from "./types";
 import { ensureBuckets } from "./storage";
 
 /**
@@ -31,7 +31,7 @@ type SeedTestimonial = {
   avatar: number | null;
   rating: number | null;
   body: string;
-  source: "interview" | "classic" | "import";
+  source: "classic" | "import";
   status: "pending" | "approved" | "hidden";
   featured?: boolean;
   identity_mode?: "full" | "first_role" | "anonymous";
@@ -40,7 +40,6 @@ type SeedTestimonial = {
   tags: string[];
   highlight?: string | null;
   highlight_mode?: "none" | "bold" | "only";
-  transcript?: InterviewTurn[];
   provenance?: Record<string, unknown>;
   provenance_public?: boolean;
   daysAgo: number;
@@ -55,7 +54,7 @@ const T: SeedTestimonial[] = [
     rating: 5,
     body:
       "Before Harbour I was doing the books on a Sunday night with a glass of wine and a spreadsheet, and dreading January. What nearly stopped me was the price, honestly, it felt like a luxury for a business my size. Now the numbers are just done. I look at one page on a Monday and I know where I am. I've told two other founders in my co-working space already.",
-    source: "interview",
+    source: "classic",
     status: "approved",
     featured: true,
     objection: "price",
@@ -63,16 +62,6 @@ const T: SeedTestimonial[] = [
     tags: ["small team", "founder", "monthly reporting"],
     highlight: "Now the numbers are just done.",
     highlight_mode: "bold",
-    transcript: [
-      { role: "interviewer", text: "What was going on before you found Harbour?" },
-      { role: "customer", text: "Doing the books myself on a Sunday night. Glass of wine, spreadsheet, dreading January every year." },
-      { role: "interviewer", text: "You mentioned dreading January. What nearly stopped you handing it over?" },
-      { role: "customer", text: "The price, honestly. It felt like a luxury for a business my size. I kept thinking I should just be more disciplined." },
-      { role: "interviewer", text: "And once you started, what actually changed on those Sunday nights?" },
-      { role: "customer", text: "They stopped. The numbers are just done now. I look at one page on a Monday and I know where I am." },
-      { role: "interviewer", text: "Who would you tell about this?" },
-      { role: "customer", text: "Already told two other founders in my co-working space." },
-    ],
     provenance_public: true,
     daysAgo: 4,
   },
@@ -84,7 +73,7 @@ const T: SeedTestimonial[] = [
     rating: 5,
     body:
       "We'd been with the same accountant for nine years and switching felt like a betrayal, plus I assumed it would be a nightmare to move everything. It took one call. They pulled the history in themselves. What changed is I actually get answers now, the same week, not at year end.",
-    source: "interview",
+    source: "classic",
     status: "approved",
     featured: true,
     objection: "switching",
@@ -92,16 +81,6 @@ const T: SeedTestimonial[] = [
     tags: ["switching", "trades", "responsiveness"],
     highlight: "It took one call.",
     highlight_mode: "bold",
-    transcript: [
-      { role: "interviewer", text: "What was going on before you found Harbour?" },
-      { role: "customer", text: "Nine years with the same accountant. Fine, but slow. I'd ask something in March and hear back after year end." },
-      { role: "interviewer", text: "Nine years is a long time. What nearly stopped you moving?" },
-      { role: "customer", text: "Felt like a betrayal to be honest. And I assumed moving everything would be a nightmare." },
-      { role: "interviewer", text: "How did the move actually go, compared with the nightmare you expected?" },
-      { role: "customer", text: "It took one call. They pulled the history in themselves." },
-      { role: "interviewer", text: "Who would you tell about this?" },
-      { role: "customer", text: "Any other tradesman who's been putting it off." },
-    ],
     provenance_public: true,
     daysAgo: 9,
   },
@@ -113,23 +92,13 @@ const T: SeedTestimonial[] = [
     rating: 5,
     body:
       "I didn't trust anyone with our numbers because the last firm made a VAT mistake that cost us. Harbour walked me through exactly how they check things before I signed anything. Two quarters in, zero surprises, and I sleep better.",
-    source: "interview",
+    source: "classic",
     status: "approved",
     objection: "trust",
     outcome: "Zero surprises, two quarters",
     tags: ["trust", "vat", "design studio"],
     highlight: "Two quarters in, zero surprises, and I sleep better.",
     highlight_mode: "bold",
-    transcript: [
-      { role: "interviewer", text: "What was going on before you found Harbour?" },
-      { role: "customer", text: "The last firm made a VAT mistake that cost us a few thousand. So I didn't trust anyone with our numbers." },
-      { role: "interviewer", text: "After that, what nearly stopped you trying again?" },
-      { role: "customer", text: "Just the fear of it happening twice. They walked me through exactly how they check things before I signed anything, which helped." },
-      { role: "interviewer", text: "What has actually changed since?" },
-      { role: "customer", text: "Two quarters in, zero surprises. I sleep better." },
-      { role: "interviewer", text: "Who would you tell about this?" },
-      { role: "customer", text: "Anyone who's been burned before." },
-    ],
     daysAgo: 15,
   },
   {
@@ -157,7 +126,7 @@ const T: SeedTestimonial[] = [
     rating: 5,
     body:
       "I run a small online shop and I was losing a full day a month to reconciliations. Harbour took that off me in the first week. I got the day back and I've spent it on the shop, which is what I should have been doing all along.",
-    source: "interview",
+    source: "classic",
     status: "approved",
     identity_mode: "first_role",
     objection: "time",
@@ -165,16 +134,6 @@ const T: SeedTestimonial[] = [
     tags: ["ecommerce", "time saved", "reconciliation"],
     highlight: "I got the day back and I've spent it on the shop, which is what I should have been doing all along.",
     highlight_mode: "bold",
-    transcript: [
-      { role: "interviewer", text: "What was going on before you found Harbour?" },
-      { role: "customer", text: "Losing a full day a month to reconciliations. Every month." },
-      { role: "interviewer", text: "A full day is a lot. What nearly stopped you handing that over?" },
-      { role: "customer", text: "Thought it'd take longer to explain my setup than to just do it myself." },
-      { role: "interviewer", text: "Did it? What actually changed once you started?" },
-      { role: "customer", text: "No. They took it off me in the first week. I got the day back and I've spent it on the shop, which is what I should have been doing all along." },
-      { role: "interviewer", text: "Who would you tell about this?" },
-      { role: "customer", text: "Every other small shop owner in my Facebook group." },
-    ],
     daysAgo: 27,
   },
   {
@@ -203,23 +162,13 @@ const T: SeedTestimonial[] = [
     rating: 5,
     body:
       "I nearly didn't go ahead because of the monthly fee. Then I worked out what my own time was costing me and it wasn't close. Six months in, our margins are clearer and I've raised prices twice with confidence because I could finally see the numbers.",
-    source: "interview",
+    source: "classic",
     status: "approved",
     objection: "price",
     outcome: "Raised prices with confidence",
     tags: ["pricing", "margins", "food and drink"],
     highlight: "Then I worked out what my own time was costing me and it wasn't close.",
     highlight_mode: "bold",
-    transcript: [
-      { role: "interviewer", text: "What was going on before you found Harbour?" },
-      { role: "customer", text: "Roasting, selling, and doing the books at midnight. No idea what my real margins were." },
-      { role: "interviewer", text: "What nearly stopped you going ahead?" },
-      { role: "customer", text: "The monthly fee. Then I worked out what my own time was costing me and it wasn't close." },
-      { role: "interviewer", text: "What actually changed once you could see the numbers?" },
-      { role: "customer", text: "Margins are clearer. I've raised prices twice with confidence, six months in." },
-      { role: "interviewer", text: "Who would you tell about this?" },
-      { role: "customer", text: "Other food producers. We all underprice." },
-    ],
     daysAgo: 40,
   },
   {
@@ -266,21 +215,11 @@ const T: SeedTestimonial[] = [
     rating: 5,
     body:
       "Payroll used to eat my Friday afternoons. Now I get a message saying it's done and I check it on my phone between clients. That's it. That's the whole review.",
-    source: "interview",
+    source: "classic",
     status: "pending",
     objection: null,
     outcome: null,
     tags: [],
-    transcript: [
-      { role: "interviewer", text: "What was going on before you found Harbour?" },
-      { role: "customer", text: "Payroll ate my Friday afternoons. Every single week." },
-      { role: "interviewer", text: "What nearly stopped you going ahead?" },
-      { role: "customer", text: "Thought it would be complicated to hand over with staff on different hours." },
-      { role: "interviewer", text: "What actually changed once you started?" },
-      { role: "customer", text: "I get a message saying it's done and I check it on my phone between clients. That's it. That's the whole review." },
-      { role: "interviewer", text: "Who would you tell about this?" },
-      { role: "customer", text: "Any gym owner with more than two staff." },
-    ],
     daysAgo: 1,
   },
   {
@@ -355,29 +294,21 @@ export async function seedDemo(admin: SupabaseClient, slug: string): Promise<{ w
     .insert([
       {
         workspace_id: workspaceId,
-        slug: "interview",
-        title: "Three minutes, in your words",
-        intro: "A short conversation instead of a form. Your answers become a testimonial you approve before anything is used.",
-        questions: DEFAULT_QUESTIONS,
-        mode: "chat",
+        slug: "share",
+        title: "Tell us how it went",
+        intro: "A couple of sentences in your own words is plenty. You choose how you are named before anything is published.",
+        questions: [],
+        mode: "classic",
         thank_you: "Thank you. That was genuinely useful.",
       },
       {
         workspace_id: workspaceId,
-        slug: "quick",
-        title: "Leave a quick review",
-        intro: "A couple of sentences is plenty.",
-        questions: [],
-        mode: "classic",
-      },
-      {
-        workspace_id: workspaceId,
         slug: "launch-offer",
-        title: "Tell us how it went",
-        intro: "We are collecting a few honest words from early clients.",
-        questions: DEFAULT_QUESTIONS,
+        title: "A few honest words",
+        intro: "We are collecting feedback from early clients.",
+        questions: [],
         incentive: "Leave a review and we take 10% off next month's invoice.",
-        mode: "chat",
+        mode: "classic",
         thank_you: "Thanks. The 10% is on its way to your next invoice.",
       },
     ])
@@ -387,7 +318,7 @@ export async function seedDemo(admin: SupabaseClient, slug: string): Promise<{ w
 
   const rows = T.map((t) => ({
     workspace_id: workspaceId,
-    form_id: t.source === "import" ? null : formId(t.source === "interview" ? "interview" : "quick"),
+    form_id: t.source === "import" ? null : formId("share"),
     author_name: t.author_name,
     author_role: t.author_role,
     author_company: t.author_company,
@@ -395,7 +326,6 @@ export async function seedDemo(admin: SupabaseClient, slug: string): Promise<{ w
     avatar_url: t.avatar ? `https://i.pravatar.cc/128?img=${t.avatar}` : null,
     rating: t.rating,
     body: t.body,
-    raw_transcript: t.transcript ?? null,
     source: t.source,
     status: t.status,
     featured: t.featured ?? false,
@@ -448,7 +378,7 @@ export async function seedDemo(admin: SupabaseClient, slug: string): Promise<{ w
   await admin.from("ask").insert([
     {
       workspace_id: workspaceId,
-      form_id: formId("interview"),
+      form_id: formId("share"),
       email: "sam@example.com",
       name: "Sam Reilly",
       order_ref: "INV-2041",
@@ -458,7 +388,7 @@ export async function seedDemo(admin: SupabaseClient, slug: string): Promise<{ w
     },
     {
       workspace_id: workspaceId,
-      form_id: formId("interview"),
+      form_id: formId("share"),
       email: "jo@example.com",
       name: "Jo Adebayo",
       order_ref: "INV-2044",

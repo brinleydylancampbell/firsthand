@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Sign in" };
 export default async function LoginPage(props: PageProps<"/login">) {
   const sp = await props.searchParams;
   const next = typeof sp.next === "string" ? sp.next : "/app";
-  const error = sp.error === "link";
+  const error = sp.error === "link" || sp.error === "demo";
 
   return (
     <main className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center px-6 py-16">
@@ -19,12 +19,12 @@ export default async function LoginPage(props: PageProps<"/login">) {
       </p>
       {error ? (
         <p role="alert" className="mb-4 rounded-xl border border-danger/30 bg-danger/5 p-3 text-sm text-danger">
-          That link has expired or was already used. Request a new one.
+          {sp.error === "demo" ? "The demo could not start. Try again in a moment, or sign in with your email." : "That link has expired or was already used. Request a new one."}
         </p>
       ) : null}
       <LoginForm next={next} />
       <p className="mt-8 text-sm text-ink-3">
-        Just looking? <Link href="/demo/login" className="underline underline-offset-2 hover:text-ink">Sign in to the demo dashboard</Link> instead.
+        Just looking? <Link href="/demo" className="underline underline-offset-2 hover:text-ink">Open the demo</Link> instead, no email needed.
       </p>
     </main>
   );

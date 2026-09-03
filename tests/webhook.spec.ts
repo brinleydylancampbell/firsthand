@@ -14,15 +14,3 @@ test("webhook rejects a bad payload with a helpful error", async ({ request }) =
   });
   expect(res.status()).toBe(401);
 });
-
-test("interview turn creates a draft and streams a question", async ({ request }) => {
-  test.skip(!process.env.ANTHROPIC_API_KEY, "needs a model key");
-  const res = await request.post("/api/interview", {
-    data: { id: null, ws: demo, form: "interview", turns: [] },
-  });
-  expect(res.ok()).toBeTruthy();
-  expect(res.headers()["x-testimonial-id"]).toMatch(/[0-9a-f-]{36}/);
-  const text = await res.text();
-  expect(text.trim().length).toBeGreaterThan(10);
-  expect(text).toMatch(/\?/);
-});

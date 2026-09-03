@@ -47,7 +47,6 @@ export default async function ThanksPage(props: PageProps<"/f/[ws]/[form]/thanks
         </figure>
 
         <p className="mt-4 text-sm text-ink-2">
-          {testimonial.source === "interview" ? "Written from your answers, in your words. " : ""}
           {workspace.name} will review it before it appears anywhere.
         </p>
 

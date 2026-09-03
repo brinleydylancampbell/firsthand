@@ -163,13 +163,6 @@ export type Ask = {
   created_at: string;
 };
 
-export const DEFAULT_QUESTIONS: string[] = [
-  "What was going on before you found us?",
-  "What nearly stopped you going ahead?",
-  "What actually changed once you started?",
-  "Who would you tell about this?",
-];
-
 export const DEFAULT_WIDGET_CONFIG: WidgetConfig = {
   filters: {},
   count: 6,

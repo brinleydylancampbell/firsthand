@@ -67,10 +67,10 @@ export default async function EmbedTestPage(props: PageProps<"/embed-test/[host]
         <p style={{ fontSize: 17, lineHeight: 1.6, maxWidth: 620, opacity: 0.85 }}>{h.blurb}</p>
 
         <h2 style={{ fontSize: 22, margin: "48px 0 16px" }}>What people say</h2>
-        <div dangerouslySetInnerHTML={{ __html: wall }} />
+        <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: wall }} />
 
         <h2 style={{ fontSize: 22, margin: "48px 0 16px" }}>On the pricing page</h2>
-        <div dangerouslySetInnerHTML={{ __html: single }} />
+        <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: single }} />
 
         <p style={{ marginTop: 48, fontSize: 14, opacity: 0.85, lineHeight: 1.6 }}>
           Everything below the widgets should stay exactly where it was while they load. The heights above were reserved by

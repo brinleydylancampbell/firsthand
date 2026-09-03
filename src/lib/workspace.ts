@@ -3,7 +3,7 @@ import type { User } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
 import { adminClient } from "./supabase/admin";
 import { createClient } from "./supabase/server";
-import { DEFAULT_QUESTIONS, DEFAULT_WIDGET_CONFIG, type Workspace } from "./types";
+import { DEFAULT_WIDGET_CONFIG, type Workspace } from "./types";
 import { slugify } from "./utils";
 
 export const DEMO_SLUG = process.env.DEMO_WORKSPACE_SLUG ?? "demo";
@@ -83,9 +83,9 @@ export async function ensureWorkspace(user: User, opts: { joinDemo: boolean }): 
       workspace_id: ws.id,
       slug: "share",
       title: `Tell us how it went`,
-      intro: `A few quick questions. Your answers become a short testimonial you get to approve before anything is published.`,
-      questions: DEFAULT_QUESTIONS,
-      mode: "chat",
+      intro: "A couple of sentences in your own words is plenty. You choose how you are named before anything is published.",
+      questions: [],
+      mode: "classic",
     });
     await admin.from("widget").insert({
       workspace_id: ws.id,

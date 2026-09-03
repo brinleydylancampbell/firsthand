@@ -6,7 +6,7 @@ import { appUrl } from "./utils";
 
 export const DEFAULT_ASK_SUBJECT = "How did it go?";
 export const DEFAULT_ASK_BODY =
-  "Hi {{name}},\n\nWould you spare three minutes to tell us how it went? It's a short conversation, not a form, and you approve every word before anything is used.\n\n{{link}}\n\nThank you.";
+  "Hi {{name}},\n\nWould you spare two minutes to tell us how it went? A few sentences is plenty, and you choose how you are named before anything is published.\n\n{{link}}\n\nThank you.";
 
 export function fillTemplate(template: string, vars: Record<string, string>): string {
   return template.replace(/\{\{\s*(\w+)\s*\}\}/g, (_, k: string) => vars[k] ?? "");

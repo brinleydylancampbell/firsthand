@@ -25,16 +25,15 @@ test("wall shows approved testimonials with filter chips and dark mode", async (
   await expect(page.getByText("Payroll used to eat my Friday")).toHaveCount(0);
 });
 
-test("provenance page shows the real interview", async ({ page }) => {
+test("provenance page shows consent and identity", async ({ page }) => {
   await page.goto(`/w/${demo}`);
   await page.getByRole("link", { name: "See how this was collected" }).first().click();
-  await expect(page.getByRole("heading", { name: /in the customer’s own words/ })).toBeVisible();
-  await expect(page.getByText("The conversation")).toBeVisible();
-  await expect(page.getByText("Asked").first()).toBeVisible();
+  await expect(page.getByRole("heading", { name: /with consent/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Consent", exact: true })).toBeVisible();
 });
 
 test("classic form requires consent and lands in pending", async ({ page }) => {
-  await page.goto(`/f/${demo}/quick`);
+  await page.goto(`/f/${demo}/share`);
   await page.getByRole("textbox", { name: "Your name" }).fill("Playwright Tester");
   await page.getByLabel("Role", { exact: true }).fill("QA");
   await page.getByLabel("Company", { exact: true }).fill("Test Co");
@@ -51,7 +50,7 @@ test("classic form requires consent and lands in pending", async ({ page }) => {
 });
 
 test("public pages have OG images", async ({ request }) => {
-  for (const path of [`/api/og/wall/${demo}`, `/api/og/form/${demo}/interview`]) {
+  for (const path of [`/api/og/wall/${demo}`, `/api/og/form/${demo}/share`]) {
     const res = await request.get(path);
     expect(res.ok(), path).toBeTruthy();
     expect(res.headers()["content-type"]).toContain("image/png");

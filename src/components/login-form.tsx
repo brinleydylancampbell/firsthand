@@ -23,7 +23,7 @@ export function LoginForm({ demo, next }: { demo?: boolean; next?: string }) {
     <form action={action} className="space-y-4">
       {demo ? <input type="hidden" name="join" value="demo" /> : null}
       <input type="hidden" name="next" value={next ?? "/app"} />
-      <Field label="Email" htmlFor="email" hint={demo ? "Any address works. You join the shared demo workspace, which resets nightly." : "No password. We email you a link."}>
+      <Field label="Email" htmlFor="email" hint="No password. We email you a link.">
         <Input id="email" name="email" type="email" autoComplete="email" required autoFocus placeholder="you@company.com" />
       </Field>
       {state && !state.ok ? <ErrorNote title={state.message} /> : null}

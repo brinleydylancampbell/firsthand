@@ -13,17 +13,16 @@ const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
   title: { default: "Firsthand", template: "%s · Firsthand" },
-  description: "Testimonials in your customers’ own words. A three-minute conversation instead of a blank box, with consent and proof built in.",
+  description: "Testimonials in your customers’ own words. Collected with consent, found in seconds, shown anywhere with a 1 KB embed.",
 };
 
-/* Direction contract for the landing redesign, kept in the emitted markup so it
-   survives the build and can be audited against the render. */
+/* Direction contract, kept in the emitted markup so it can be audited against the render. */
 const CONTRACT = `<!--
-THESIS: One page, one action, nothing to navigate. Firsthand shows a conversation becoming a testimonial and asks for one thing: sign in to the demo. It refuses the six-problem grid, the research narrative, the stats strip and the nav bar.
-OWN-WORLD: Warm off-white ground (#f7f6f3), white cards, two ink bands bookending the page, one purple (#7858d8) used only where you act. Inter Tight display, Inter body, Plex Mono for data. 16px cards, 12px buttons, pill chips. Figures drawn in DOM, never screenshots. Sibling to SubbyFlow.
-STORY: Visitor reads one line, watches a customer's answers turn into a quote they approve, understands consent and proof are built in, and signs in to see the owner's side.
-FIRST VIEWPORT: Centred headline and lede, an email field with one purple button, then a wide white panel: the interview mid-conversation on the left, the draft assembling on the right, the consent row beneath.
-FORM: User-pinned direction (SubbyFlow's discipline); no roll.
+THESIS: The product is the pitch. One line, one button, and the live demo widget on the landing page; everything else is the dashboard itself. No sections that tell what the inside could show.
+OWN-WORLD: Warm off-white ground (#f7f6f3), white cards, one purple (#7858d8) used only where you act. Inter Tight display, Inter body, Plex Mono for data. 16px cards, 12px buttons, pill chips. Sibling to SubbyFlow.
+STORY: Visitor reads one line, sees real testimonials rendering in the real embed, opens the demo with one click and is inside the owner's dashboard.
+FIRST VIEWPORT: Left-aligned headline and one-line lede, "Open the demo" button, then the demo wall widget in a white panel.
+FORM: User-pinned direction (SubbyFlow's discipline; show, don't tell). No roll.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
 -->`;
 

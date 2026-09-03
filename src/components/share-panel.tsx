@@ -146,7 +146,7 @@ export function SharePanel({ testimonial: t, workspace, onClose }: { testimonial
             <span>
               Show a “see how this was collected” link on this card.
               <span className="block text-xs text-ink-3">
-                {t.source === "interview" ? "Opens the real questions and answers." : t.source === "import" ? "Shows the source it came from." : "Shows when and how consent was given."}
+                {t.source === "import" ? "Shows the source it came from." : "Shows when and how consent was given."}
               </span>
             </span>
           </label>

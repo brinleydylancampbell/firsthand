@@ -55,7 +55,7 @@ export function AsksView({
       <header className="mt-4 mb-6">
         <h1 className="mt-1 text-xl font-semibold tracking-tight">Ask at the right moment</h1>
         <p className="mt-2 text-sm text-ink-2">
-          Your order or job system posts one line of JSON when something is delivered. Firsthand waits the delay you set, then emails an interview link. Same-day asks get answered; asks a month later mostly don’t.
+          Your order or job system posts one line of JSON when something is delivered. Firsthand waits the delay you set, then emails a link to your form. Same-day asks get answered; asks a month later mostly don’t.
         </p>
       </header>
 

@@ -1,5 +1,5 @@
 import type Anthropic from "@anthropic-ai/sdk";
-import type { InterviewTurn, Objection } from "./types";
+import type { Objection } from "./types";
 import { OBJECTIONS } from "./types";
 
 /**
@@ -7,79 +7,6 @@ import { OBJECTIONS } from "./types";
  * tuned in one place. Nothing in the app calls Claude without going through
  * one of these.
  */
-
-function transcriptText(turns: InterviewTurn[]): string {
-  return turns
-    .map((t) => `${t.role === "interviewer" ? "Interviewer" : "Customer"}: ${t.text.trim()}`)
-    .join("\n\n");
-}
-
-/* --------------------------------------------------------------------------
- * Interview: the next question
- * ------------------------------------------------------------------------ */
-
-export function interviewSystem(workspaceName: string, script: string[]): string {
-  return `You are interviewing a customer of ${workspaceName}, on ${workspaceName}'s behalf, to gather a testimonial in the customer's own words.
-
-The script below is a guide to the ground to cover, in order. You will be told which topic is next.
-
-Script:
-${script.map((q, i) => `${i + 1}. ${q}`).join("\n")}
-
-How to ask:
-- One question at a time. Two lines at most. Plain, warm, specific.
-- Build each question on what the customer just said. Pick up a phrase they used, then move to the next topic so it feels like one conversation, not a form.
-- Never lead. Do not suggest an answer, do not put words in their mouth, do not praise ${workspaceName} or hint at the answer you hope for.
-- Match their register. If they write casually, you do. If they are brief, you are brief.
-- If they have already covered the next topic, ask for one concrete detail about it instead of repeating it.
-- Do not thank them at length, do not summarise their answer back to them, do not add filler.
-
-Output only the question. No preamble, no quotation marks.`;
-}
-
-export function interviewMessages(
-  turns: InterviewTurn[],
-  nextTopic: string,
-  index: number,
-  total: number,
-): Anthropic.MessageParam[] {
-  const history = turns.length ? transcriptText(turns) : "(nothing yet)";
-  return [
-    {
-      role: "user",
-      content: `Conversation so far:\n\n${history}\n\nNext topic (${index + 1} of ${total}): ${nextTopic}\n\nAsk the next question.`,
-    },
-  ];
-}
-
-/* --------------------------------------------------------------------------
- * Interview: the draft testimonial, running and final
- * ------------------------------------------------------------------------ */
-
-export function draftSystem(workspaceName: string, running: boolean): string {
-  return `You turn interview answers into a short testimonial for ${workspaceName}, written in the first person as the customer.
-
-Rules:
-- Use only words, phrases and facts the customer actually said. You may tidy grammar and join fragments. You may not add claims, adjectives, numbers or outcomes they did not state.
-- Keep their voice. If they were blunt, stay blunt. If they were casual, stay casual.
-- 40 to 80 words when there is enough material. With little material, write less rather than inventing.${
-    running
-      ? "\n- This is a running draft from a conversation still in progress. Use what is there so far. It is fine for it to feel unfinished."
-      : ""
-  }
-- No quotation marks, no sign-off, no name, no headline, no praise for ${workspaceName} the customer did not give.
-
-Output only the testimonial text.`;
-}
-
-export function draftMessages(turns: InterviewTurn[]): Anthropic.MessageParam[] {
-  return [
-    {
-      role: "user",
-      content: `Interview transcript:\n\n${transcriptText(turns)}\n\nWrite the testimonial.`,
-    },
-  ];
-}
 
 /* --------------------------------------------------------------------------
  * Extraction on approve: objection, outcome, tags, highlight
