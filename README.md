@@ -72,10 +72,10 @@ Latest scores are recorded below and on the landing page.
 | Page | Performance | Accessibility | Best practices | SEO |
 |---|---|---|---|---|
 | `/` landing | 100 | 100 | 100 | 100 |
-| `/w/demo` wall of love | 100 | 100 | 100 | 91 |
-| `/embed-test/serif` embed host | 100 | 100 | 96 | 60 (page is `noindex`, by design) |
+| `/w/demo` wall of love | 100 | 100 | 100 | 100 |
+| `/embed-test/serif` embed host, widgets loaded | 100 | 100 | 100 | 63 (page is `noindex`, by design) |
 
-Measured 3 Sept 2026 against a local production build (`next build && next start`), desktop preset, Chrome headless. Cumulative layout shift was 0 on all three, largest contentful paint 0.6 s, total blocking time 0 ms. The embed host page is `noindex` and loads third-party placeholder avatars, which is where its SEO and best-practice points go.
+Measured 3 Sept 2026 against a local production build (`next build && next start`), desktop preset, Chrome headless. Cumulative layout shift was 0 on all three, largest contentful paint 0.6 s, total blocking time 0 ms. The embed host page is `noindex`, which is the only point it loses.
 
 ## Tests
 

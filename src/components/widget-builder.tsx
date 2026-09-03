@@ -158,7 +158,7 @@ export function WidgetBuilder({
             <p className="text-sm font-medium">Appearance</p>
             <Field label="Theme" htmlFor="theme">
               <Select id="theme" value={config.theme} onChange={(e) => patch({ theme: e.target.value as Theme })}>
-                <option value="auto">Auto (follows the visitor)</option>
+                <option value="auto">Auto (inherits your site’s colours)</option>
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
               </Select>
@@ -212,7 +212,7 @@ export function WidgetBuilder({
             </div>
             <div className={cn("mt-2 rounded-sm border border-line p-6 transition-colors", previewDark ? "bg-[#0f0f0f] text-[#f2f2f2]" : "bg-paper")} style={previewStyle}>
               {html ? (
-                <div className={cn(loadingPreview && "opacity-60 transition-opacity")} dangerouslySetInnerHTML={{ __html: previewDark && config.theme === "auto" ? html.replace('data-theme="auto"', 'data-theme="dark"') : html }} />
+                <div className={cn(loadingPreview && "opacity-60 transition-opacity")} dangerouslySetInnerHTML={{ __html: html }} />
               ) : (
                 <div className="skeleton h-40" />
               )}

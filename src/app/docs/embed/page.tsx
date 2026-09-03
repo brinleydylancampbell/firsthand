@@ -44,7 +44,7 @@ export default function EmbedDocs() {
           </thead>
           <tbody className="text-ink-2">
             {[
-              ["data-theme=\"light|dark\"", "", "Forces a theme. Default follows the visitor’s system setting."],
+              ["data-theme=\"light|dark\"", "", "Forces a theme. By default the widget inherits your page’s text colour and draws translucent borders, so it fits light and dark sites without configuration."],
               ["data-accent=\"#c2410c\"", "--fh-accent", "Stars and links"],
               ["data-radius=\"8px\"", "--fh-radius", "Card corners"],
               ["", "--fh-text", "Text colour"],

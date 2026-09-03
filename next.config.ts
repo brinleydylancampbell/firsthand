@@ -5,11 +5,10 @@ const supabaseHost = process.env.NEXT_PUBLIC_SUPABASE_URL
   : undefined;
 
 const nextConfig: NextConfig = {
-  // Crawlers and link-preview bots get metadata in <head> instead of streamed,
-  // so OG cards for forms and walls always unfurl. Lighthouse is included so
-  // audits see the same head a bot would.
-  htmlLimitedBots:
-    /Googlebot|Chrome-Lighthouse|Bingbot|Twitterbot|facebookexternalhit|LinkedInBot|Slackbot|Discordbot|WhatsApp|TelegramBot|Applebot|Mediapartners-Google|AdsBot-Google|Google-PageRenderer|YandexBot|Baiduspider|DuckDuckBot|Pinterestbot|redditbot/i,
+  // Public pages exist to be shared and indexed, so metadata always goes in
+  // <head> rather than being streamed into the body. The cost is one fast
+  // query before the first byte on dynamic pages.
+  htmlLimitedBots: /.*/,
   images: {
     remotePatterns: [
       ...(supabaseHost
